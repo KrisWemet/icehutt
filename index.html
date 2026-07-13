@@ -32,6 +32,8 @@
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍦%3C/text%3E%3C/svg%3E" />
 
+  <link rel="preload" as="image" href="images/hero.jpg" />
+
   <!-- Fonts (graceful fallbacks if offline) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -322,6 +324,26 @@
     /* Hero cone illustration */
     .hero-art { position: relative; display: grid; place-items: center; }
     .hero-art > * { grid-area: 1 / 1; }
+    .hero-photo {
+      width: min(400px, 88%);
+      border: 4px solid var(--choc);
+      border-radius: 58% 42% 55% 45% / 48% 55% 45% 52%;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -25px rgba(58, 35, 24, 0.5), 0 10px 0 var(--choc);
+      animation: blob-morph 16s ease-in-out infinite;
+      transform: rotate(-1.5deg);
+    }
+    .hero-photo img {
+      display: block; width: 100%; height: 100%; object-fit: cover;
+      aspect-ratio: 4 / 5;
+      animation: kenburns 16s ease-in-out infinite alternate;
+    }
+    @keyframes kenburns {
+      from { transform: scale(1) translate(0, 0); }
+      to { transform: scale(1.14) translate(2%, -3%); }
+    }
+    /* when the photo exists, the illustrated cone steps aside */
+    .hero-photo ~ .cone-float { display: none; }
     .blob {
       width: 78%; aspect-ratio: 1; z-index: -1;
       filter: blur(2px); opacity: 0.65;
@@ -448,6 +470,51 @@
       transition: transform 0.35s var(--ease-bounce);
     }
     .flavour-card:hover .flavour-art { transform: scale(1.12) rotate(-5deg); }
+
+    .flavour-photo {
+      margin: 2px auto 16px; width: 100%; aspect-ratio: 1;
+      border-radius: 18px; overflow: hidden;
+      border: 3px solid var(--choc);
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+    .flavour-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.6s var(--ease-bounce), filter 0.4s;
+    }
+    .flavour-card:hover .flavour-photo img { transform: scale(1.12) rotate(-1.5deg); filter: saturate(1.15); }
+    /* when the photo exists, the illustrated scoop steps aside */
+    .flavour-photo ~ .flavour-art { display: none; }
+
+    .menu-photo {
+      width: 100%; height: 160px; object-fit: cover; display: block;
+      border-radius: 16px; border: 3px solid var(--choc);
+      margin-bottom: 20px;
+      transition: transform 0.4s var(--ease-bounce);
+    }
+    .menu-card:hover .menu-photo { transform: scale(1.03) rotate(-0.8deg); }
+
+    .story-photo {
+      margin-top: 26px; transform: rotate(-1.6deg);
+      border: 4px solid var(--choc); border-radius: 20px;
+      overflow: hidden; box-shadow: 8px 8px 0 var(--choc);
+      background: #fff;
+    }
+    .story-photo img { display: block; width: 100%; height: auto; }
+    .story-photo figcaption {
+      padding: 12px 18px; font-weight: 600; font-size: 0.95rem;
+      color: var(--choc-soft); background: #fff; text-align: center;
+    }
+
+    .cta-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+      animation: kenburns 18s ease-in-out infinite alternate;
+    }
+    .cta-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(120deg, rgba(232, 67, 122, 0.88) 0%, rgba(140, 91, 216, 0.85) 100%);
+    }
+    .cta-banner > :not(.cta-bg):not(.cta-overlay) { position: relative; z-index: 2; }
 
     .fotw-banner {
       margin-top: 34px;
@@ -738,6 +805,13 @@
           <div class="blob blob-1" aria-hidden="true"></div>
           <div class="blob blob-2" aria-hidden="true"></div>
 
+          <!-- Hero photograph (falls back to the illustrated cone below if missing) -->
+          <div class="hero-photo">
+            <img src="images/hero.jpg" alt="Towering triple-scoop ice cream cone with melting drips against a summer sky"
+                 width="1024" height="1280" fetchpriority="high"
+                 onerror="this.parentElement.remove()" />
+          </div>
+
           <!-- Triple-scoop cone -->
           <svg class="cone-float" viewBox="0 0 320 520" role="img" aria-label="Triple scoop ice cream cone">
             <defs>
@@ -888,6 +962,7 @@
 
         <div class="flavours-grid reveal-stagger">
           <article class="flavour-card" style="--swatch:#8B5E3C;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-pb-chocolate.jpg" alt="Scoop of chocolate peanut butter swirl ice cream in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg1" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#A97A50"/><stop offset="0.55" stop-color="#8B5E3C"/><stop offset="1" stop-color="#5E3A21"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -901,6 +976,7 @@
             <p>Rich chocolate swirled with ribbons of real peanut butter. The local legend.</p>
           </article>
           <article class="flavour-card" style="--swatch:#FF8FAB;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-cherry-cheesecake.jpg" alt="Scoop of cherry cheesecake ice cream with graham crumble in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg2" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFF4DE"/><stop offset="0.55" stop-color="#F5E3C0"/><stop offset="1" stop-color="#D9B98C"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -915,6 +991,7 @@
             <p>Creamy cheesecake ice cream loaded with cherries and graham crumble.</p>
           </article>
           <article class="flavour-card" style="--swatch:#E8B14E;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-salted-caramel.jpg" alt="Scoop of salted caramel ice cream with caramel drizzle in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg3" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFCF8A"/><stop offset="0.55" stop-color="#E8A94E"/><stop offset="1" stop-color="#B87A2A"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -928,6 +1005,7 @@
             <p>Buttery caramel with the perfect pinch of sea salt. Dangerously smooth.</p>
           </article>
           <article class="flavour-card" style="--swatch:#FF9E3D;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-tiger-tail.jpg" alt="Scoop of orange and black licorice tiger tail ice cream in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg4" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFC078"/><stop offset="0.55" stop-color="#FF9E3D"/><stop offset="1" stop-color="#E67614"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -941,6 +1019,7 @@
             <p>Orange and black licorice — the classic Canadian campground flavour.</p>
           </article>
           <article class="flavour-card" style="--swatch:#8B5A2B;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-moose-tracks.jpg" alt="Scoop of moose tracks ice cream with fudge and peanut butter cups" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg5" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFFBEE"/><stop offset="0.55" stop-color="#FFF3DC"/><stop offset="1" stop-color="#E8D2A8"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -955,6 +1034,7 @@
             <p>Vanilla packed with fudge and peanut butter cups. Follow the tracks.</p>
           </article>
           <article class="flavour-card" style="--swatch:#7FD8C4;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-mint-chip.jpg" alt="Scoop of mint chocolate chip ice cream in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg6" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#B8F2E3"/><stop offset="0.55" stop-color="#7FD8C4"/><stop offset="1" stop-color="#46B49B"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -967,6 +1047,7 @@
             <p>Cool mint studded with dark chocolate chips. Refreshment, upgraded.</p>
           </article>
           <article class="flavour-card" style="--swatch:#9BD1FF;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-bubblegum.jpg" alt="Scoop of bright blue bubblegum ice cream with gumballs" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg7" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#C4E3FB"/><stop offset="0.55" stop-color="#8FC7F5"/><stop offset="1" stop-color="#5B9FD8"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -979,6 +1060,7 @@
             <p>Bright, sweet, and packed with gumballs — the kids' hall-of-famer.</p>
           </article>
           <article class="flavour-card" style="--swatch:#C9A0FF;">
+            <figure class="flavour-photo"><img loading="lazy" src="images/flavour-cotton-candy.jpg" alt="Scoop of pink and blue swirled cotton candy ice cream" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg8" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFD3EA"/><stop offset="0.55" stop-color="#FFB3D9"/><stop offset="1" stop-color="#F286BE"/></radialGradient></defs>
               <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
@@ -1010,6 +1092,7 @@
         <div class="menu-grid reveal-stagger">
           <div class="menu-card">
             <div class="menu-card-head"><span class="emoji" aria-hidden="true">🍦</span> Cones &amp; Cups</div>
+            <img class="menu-photo" loading="lazy" src="images/menu-cones.jpg" alt="Hand holding a huge double scoop waffle cone" width="900" height="700" onerror="this.remove()" />
             <div class="menu-item"><span>Puppy Cone <span class="fav">for dogs!</span></span><span class="dots"></span><span class="price">$2.25</span></div>
             <div class="menu-item"><span>Kids Single</span><span class="dots"></span><span class="price">$4.50</span></div>
             <div class="menu-item"><span>Single Scoop</span><span class="dots"></span><span class="price">$5.50</span></div>
@@ -1018,6 +1101,7 @@
           </div>
           <div class="menu-card">
             <div class="menu-card-head"><span class="emoji" aria-hidden="true">🥤</span> Shakes &amp; Floats</div>
+            <img class="menu-photo" loading="lazy" src="images/menu-shakes.jpg" alt="Strawberry milkshake with whipped cream and a root beer float" width="900" height="700" onerror="this.remove()" />
             <div class="menu-item"><span>Milkshake <span class="fav">any flavour</span></span><span class="dots"></span><span class="price">$7.00</span></div>
             <div class="menu-item"><span>Root Beer Float</span><span class="dots"></span><span class="price">$6.00</span></div>
             <div class="menu-item"><span>Slush</span><span class="dots"></span><span class="price">$3.50</span></div>
@@ -1025,6 +1109,7 @@
           </div>
           <div class="menu-card">
             <div class="menu-card-head"><span class="emoji" aria-hidden="true">🍨</span> Sundaes &amp; More</div>
+            <img class="menu-photo" loading="lazy" src="images/menu-sundaes.jpg" alt="Banana split sundae with whipped cream, sprinkles and cherries" width="900" height="700" onerror="this.remove()" />
             <div class="menu-item"><span>Classic Sundae</span><span class="dots"></span><span class="price">$6.50</span></div>
             <div class="menu-item"><span>Banana Split <span class="fav">share it</span></span><span class="dots"></span><span class="price">$8.50</span></div>
             <div class="menu-item"><span>Snacks &amp; Treats</span><span class="dots"></span><span class="price">varies</span></div>
@@ -1055,6 +1140,10 @@
                 scooped generously, served with a smile.
               </p>
             </div>
+            <figure class="story-photo reveal">
+              <img loading="lazy" src="images/story-hut.jpg" alt="Small-town ice cream stand glowing at golden hour on a summer evening" width="1000" height="750" onerror="this.closest('figure').remove()" />
+              <figcaption>Golden hour at the Hut 🌅</figcaption>
+            </figure>
           </div>
           <ul class="story-points reveal-stagger">
             <li>
@@ -1159,6 +1248,8 @@
     <section aria-label="Visit us today">
       <div class="wrap reveal">
         <div class="cta-banner">
+          <img class="cta-bg" loading="lazy" src="images/cta-banner.jpg" alt="" aria-hidden="true" onerror="this.remove()" />
+          <div class="cta-overlay" aria-hidden="true"></div>
           <h2>Your cone is waiting. 🍦</h2>
           <p>Swing by the Hut tonight — the hardest part is picking a flavour.</p>
           <a class="btn" href="https://maps.google.com/?q=The+Ice+Hut,+9911+100+Street,+Morinville,+AB" target="_blank" rel="noopener">Take me to the ice cream →</a>

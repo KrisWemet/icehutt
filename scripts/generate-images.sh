@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Generates the site's photography from images/prompts.json using the free
 # Pollinations.ai API (Flux model). Run by .github/workflows/generate-images.yml.
+# Editing this file (or prompts.json) and pushing re-triggers generation.
 set -euo pipefail
 
 PROMPTS_FILE="images/prompts.json"

@@ -5,9 +5,18 @@ A modern, animation-rich redesign concept for [The Ice Hut](https://morinvilleic
 ## What's inside
 
 - **`index.html`** — the entire site, fully self-contained (inline CSS + JS, zero build step, zero dependencies). Open it in any browser or drop it on any static host.
+- **`images/`** — AI-generated food photography (see *Automations* below), driven by `images/prompts.json`.
 - **`robots.txt`** / **`sitemap.xml`** — search engine crawling support.
 - **`llms.txt`** — an [llms.txt](https://llmstxt.org/) summary so AI assistants (ChatGPT, Claude, Perplexity, Google AI Overviews) can answer questions about the shop accurately.
 - **`og-image.png`** — social sharing preview image (Facebook, iMessage, etc.).
+
+## Automations 🤖
+
+- **AI image pipeline** (`.github/workflows/generate-images.yml`): edit a prompt in `images/prompts.json`, push, and GitHub Actions regenerates that photography using the free [Pollinations.ai](https://pollinations.ai) Flux API and commits the results back — no design tools or paid APIs needed. Every photo has a built-in fallback: if an image is missing, the site swaps in its hand-drawn SVG illustration automatically.
+- **Auto-deploy** (`.github/workflows/deploy.yml`): every push to `main` publishes the site to GitHub Pages.
+- **Weekly health check** (`.github/workflows/link-check.yml`): validates the HTML and checks for broken links every Monday.
+- **Flavour of the Week**: the spotlight banner rotates through the flavour list automatically every Monday — zero maintenance.
+- **Live hours**: the "Open now / Opens at…" pill and highlighted hours row compute themselves in Edmonton time.
 
 ## Highlights
 
