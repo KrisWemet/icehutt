@@ -20,6 +20,11 @@ A modern, animation-rich redesign concept for [The Ice Hut](https://morinvilleic
 
 ## Highlights
 
+**3D Cone Lab** 🧪
+- A real-time WebGL "Build your dream cone" section (`js/cone3d.js`, powered by a vendored Three.js — MIT licence, no CDN): tap flavours to stack squishy, hand-scooped 3D scoops with a drop-and-bounce animation, drag to spin, floating 3D sprinkles, cherry on top, and a camera that pulls back as the tower grows (max 5 scoops — "a Morinville single")
+- Progressive enhancement: the section only appears when WebGL is available, so nothing breaks on old devices
+- The hero photo also tilts in 3D as the mouse moves
+
 **Motion & delight**
 - Animated sprinkle particle field in the hero (canvas, pauses off-screen)
 - Floating triple-scoop SVG cone with dripping animation and a spinning "Since 1995" badge

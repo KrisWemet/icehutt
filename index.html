@@ -331,7 +331,9 @@
       overflow: hidden;
       box-shadow: 0 30px 60px -25px rgba(58, 35, 24, 0.5), 0 10px 0 var(--choc);
       animation: blob-morph 16s ease-in-out infinite;
-      transform: rotate(-1.5deg);
+      transform: perspective(900px) rotate(-1.5deg) rotateY(var(--tilt-y, 0deg)) rotateX(var(--tilt-x, 0deg));
+      transition: transform 0.25s ease-out;
+      will-change: transform;
     }
     .hero-photo img {
       display: block; width: 100%; height: 100%; object-fit: cover;
@@ -572,6 +574,55 @@
     }
     .menu-fineprint { margin-top: 26px; text-align: center; color: var(--choc-soft); font-size: 0.9rem; }
 
+    /* ============ 3D builder ============ */
+    .builder-section {
+      background:
+        radial-gradient(900px 550px at -10% 10%, var(--caramel-soft) 0%, transparent 55%),
+        radial-gradient(800px 500px at 110% 90%, var(--pink-soft) 0%, transparent 55%),
+        var(--cream);
+    }
+    .builder-card {
+      margin-top: 48px;
+      display: grid; grid-template-columns: 1.15fr 0.85fr;
+      background: #fff; border: 3px solid var(--choc); border-radius: var(--radius);
+      box-shadow: var(--shadow-pop); overflow: hidden;
+    }
+    .builder-canvas {
+      min-height: 520px; position: relative; cursor: grab;
+      background:
+        radial-gradient(600px 380px at 30% 20%, var(--mint-soft) 0%, transparent 60%),
+        radial-gradient(500px 350px at 80% 80%, var(--pink-soft) 0%, transparent 60%),
+        linear-gradient(180deg, #FFF9F0 0%, #FFEFE0 100%);
+    }
+    .builder-canvas:active { cursor: grabbing; }
+    .builder-canvas canvas { position: absolute; inset: 0; }
+    .builder-ui {
+      padding: 34px 30px; border-left: 3px solid var(--choc);
+      display: flex; flex-direction: column; gap: 22px; justify-content: center;
+    }
+    .builder-status { font-weight: 700; font-size: 1.08rem; }
+    .builder-status #scoopCount { color: var(--pink-deep); font-family: var(--font-display); font-size: 1.3em; }
+    .builder-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .builder-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-weight: 600; font-size: 0.92rem;
+      background: var(--cream); border: 2.5px solid var(--choc); border-radius: 999px;
+      padding: 9px 16px; cursor: pointer;
+      box-shadow: 0 3px 0 var(--choc);
+      transition: transform 0.2s var(--ease-bounce), box-shadow 0.2s, background 0.2s;
+    }
+    .builder-chip:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--choc); background: #fff; }
+    .builder-chip:active { transform: translateY(1px); box-shadow: 0 2px 0 var(--choc); }
+    .chip-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--choc); }
+    .builder-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .builder-actions .btn { padding: 12px 22px; font-size: 0.95rem; }
+
+    @media (max-width: 960px) {
+      .builder-card { grid-template-columns: 1fr; }
+      .builder-canvas { min-height: 400px; }
+      .builder-ui { border-left: none; border-top: 3px solid var(--choc); }
+    }
+
     /* ============ Story ============ */
     .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .story-card {
@@ -755,6 +806,7 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="#flavours">Flavours</a></li>
           <li><a href="#menu">Menu</a></li>
+          <li><a href="#builder">Cone Lab</a></li>
           <li><a href="#story">Our Story</a></li>
           <li><a href="#visit">Visit</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -1121,6 +1173,28 @@
       </div>
     </section>
 
+    <!-- ============ 3D cone builder ============ -->
+    <section id="builder" class="builder-section" hidden aria-labelledby="builder-title">
+      <div class="wrap">
+        <div class="reveal">
+          <p class="section-kicker">Play with it</p>
+          <h2 class="section-title" id="builder-title">Build your dream cone 🎨</h2>
+          <p class="section-sub">Tap flavours to stack your scoops in 3D — drag to spin it around. (We'll build the real one at the window.)</p>
+        </div>
+        <div class="builder-card reveal">
+          <div class="builder-canvas" role="img" aria-label="Interactive 3D ice cream cone you can stack with flavours"></div>
+          <div class="builder-ui">
+            <p class="builder-status"><span id="scoopCount">0</span> scoop(s) — <span id="builderQuip">Pick a flavour to start stacking!</span></p>
+            <div class="builder-chips" role="group" aria-label="Flavour choices"></div>
+            <div class="builder-actions">
+              <button class="btn btn-primary" type="button" id="builderSurprise">🎲 Surprise me</button>
+              <button class="btn btn-ghost" type="button" id="builderReset">↺ Start over</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ Story ============ -->
     <section id="story" aria-labelledby="story-title">
       <div class="wrap">
@@ -1448,6 +1522,23 @@
         });
       }
 
+      /* ---------- Hero photo 3D tilt (fine pointers only) ---------- */
+      var heroPhoto = document.querySelector('.hero-photo');
+      var heroSection = document.querySelector('.hero');
+      if (heroPhoto && heroSection && !reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+        heroSection.addEventListener('mousemove', function (e) {
+          var r = heroSection.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5;
+          var y = (e.clientY - r.top) / r.height - 0.5;
+          heroPhoto.style.setProperty('--tilt-y', (x * 9) + 'deg');
+          heroPhoto.style.setProperty('--tilt-x', (-y * 7) + 'deg');
+        });
+        heroSection.addEventListener('mouseleave', function () {
+          heroPhoto.style.setProperty('--tilt-y', '0deg');
+          heroPhoto.style.setProperty('--tilt-x', '0deg');
+        });
+      }
+
       /* ---------- Sprinkles canvas ---------- */
       var canvas = document.getElementById('sprinkles');
       if (canvas && !reducedMotion) {
@@ -1509,6 +1600,22 @@
         requestAnimationFrame(draw);
       }
     })();
+  </script>
+
+  <!-- 3D cone builder: progressive enhancement, section stays hidden if WebGL/modules are unavailable -->
+  <script type="module">
+    const section = document.getElementById('builder');
+    try {
+      const probe = document.createElement('canvas');
+      const gl = probe.getContext('webgl2') || probe.getContext('webgl');
+      if (gl) {
+        const { initConeBuilder } = await import('./js/cone3d.js');
+        section.hidden = false;
+        initConeBuilder(section);
+      }
+    } catch (e) {
+      section.hidden = true;
+    }
   </script>
 </body>
 </html>
