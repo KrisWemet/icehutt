@@ -1,0 +1,100 @@
+[
+  {
+    "name": "hero",
+    "width": 1024,
+    "height": 1280,
+    "seed": 71,
+    "prompt": "professional food photography, towering triple scoop ice cream cone held up against a dreamy pastel pink summer sky, scoops of mint chocolate chip, strawberry and salted caramel in a golden waffle cone, glossy melting drips running down, colourful sprinkles, bright warm sunlight, shallow depth of field, mouth-watering, ultra realistic, high detail"
+  },
+  {
+    "name": "flavour-pb-chocolate",
+    "width": 800,
+    "height": 800,
+    "seed": 11,
+    "prompt": "professional food photography close-up, single generous scoop of dark chocolate ice cream with glossy peanut butter swirl ribbons, in a crispy waffle cone, warm studio lighting, soft cream background, ultra realistic, appetizing"
+  },
+  {
+    "name": "flavour-cherry-cheesecake",
+    "width": 800,
+    "height": 800,
+    "seed": 12,
+    "prompt": "professional food photography close-up, scoop of creamy cheesecake ice cream with deep red cherry swirls and graham cracker crumble pieces, in a waffle cone, soft pastel background, ultra realistic, appetizing"
+  },
+  {
+    "name": "flavour-salted-caramel",
+    "width": 800,
+    "height": 800,
+    "seed": 13,
+    "prompt": "professional food photography close-up, scoop of golden salted caramel ice cream with glossy caramel drizzle and flaky sea salt, in a waffle cone, warm light, soft cream background, ultra realistic, appetizing"
+  },
+  {
+    "name": "flavour-tiger-tail",
+    "width": 800,
+    "height": 800,
+    "seed": 14,
+    "prompt": "professional food photography close-up, scoop of bright orange ice cream with bold black licorice swirl stripes, classic canadian tiger tail flavour, in a waffle cone, soft pastel background, ultra realistic, appetizing"
+  },
+  {
+    "name": "flavour-moose-tracks",
+    "width": 800,
+    "height": 800,
+    "seed": 15,
+    "prompt": "professional food photography close-up, scoop of vanilla ice cream loaded with thick fudge swirls and mini peanut butter cups, in a waffle cone, warm studio light, soft cream background, ultra realistic, appetizing"
+  },
+  {
+    "name": "flavour-mint-chip",
+    "width": 800,
+    "height": 800,
+    "seed": 16,
+    "prompt": "professional food photography close-up, scoop of pale green mint chocolate chip ice cream studded with dark chocolate chips, in a waffle cone, fresh mint leaf garnish, soft pastel background, ultra realistic, appetizing"
+  },
+  {
+    "name": "flavour-bubblegum",
+    "width": 800,
+    "height": 800,
+    "seed": 17,
+    "prompt": "professional food photography close-up, scoop of bright blue bubblegum ice cream with colourful candy gumballs, in a waffle cone, playful pastel background, ultra realistic, appetizing"
+  },
+  {
+    "name": "flavour-cotton-candy",
+    "width": 800,
+    "height": 800,
+    "seed": 18,
+    "prompt": "professional food photography close-up, scoop of swirled pastel pink and blue cotton candy ice cream, in a waffle cone, dreamy carnival pastel background, ultra realistic, appetizing"
+  },
+  {
+    "name": "menu-cones",
+    "width": 900,
+    "height": 700,
+    "seed": 21,
+    "prompt": "professional food photography, hand holding an enormous double scoop ice cream in a golden waffle cone against a sunny pastel background, generous portions, melting slightly, summer vibes, ultra realistic"
+  },
+  {
+    "name": "menu-shakes",
+    "width": 900,
+    "height": 700,
+    "seed": 22,
+    "prompt": "professional food photography, tall strawberry milkshake in a retro glass with whipped cream, red striped paper straw and a cherry on top, next to a root beer float, retro diner pastel background, ultra realistic"
+  },
+  {
+    "name": "menu-sundaes",
+    "width": 900,
+    "height": 700,
+    "seed": 23,
+    "prompt": "professional food photography, classic banana split sundae in a glass boat dish with three scoops, whipped cream, chocolate sauce, sprinkles and cherries, warm inviting light, pastel background, ultra realistic"
+  },
+  {
+    "name": "story-hut",
+    "width": 1000,
+    "height": 750,
+    "seed": 31,
+    "prompt": "warm nostalgic photography, charming small-town wooden ice cream stand at golden hour on a summer evening in a canadian prairie town, families enjoying ice cream cones, string lights, soft warm glow, ultra realistic"
+  },
+  {
+    "name": "cta-banner",
+    "width": 1600,
+    "height": 640,
+    "seed": 41,
+    "prompt": "professional food photography wide banner, row of colourful ice cream scoops in waffle cones lined up on a pastel pink counter, sprinkles scattered, bright cheerful summer lighting, shallow depth of field, ultra realistic"
+  }
+]

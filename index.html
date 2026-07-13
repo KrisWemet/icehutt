@@ -321,6 +321,26 @@
 
     /* Hero cone illustration */
     .hero-art { position: relative; display: grid; place-items: center; }
+    .hero-art > * { grid-area: 1 / 1; }
+    .blob {
+      width: 78%; aspect-ratio: 1; z-index: -1;
+      filter: blur(2px); opacity: 0.65;
+      animation: blob-morph 12s ease-in-out infinite;
+    }
+    .blob-1 {
+      background: linear-gradient(135deg, var(--pink-soft), var(--caramel-soft));
+      transform: translate(-8%, -4%);
+    }
+    .blob-2 {
+      background: linear-gradient(315deg, var(--mint-soft), var(--pink-soft));
+      transform: translate(10%, 8%) scale(0.9);
+      animation-delay: -6s; animation-duration: 15s;
+    }
+    @keyframes blob-morph {
+      0%, 100% { border-radius: 58% 42% 55% 45% / 48% 55% 45% 52%; }
+      33% { border-radius: 45% 55% 40% 60% / 60% 42% 58% 40%; }
+      66% { border-radius: 60% 40% 58% 42% / 42% 58% 42% 58%; }
+    }
     .cone-float { animation: bob 4.5s ease-in-out infinite; width: min(360px, 80%); }
     @keyframes bob {
       0%, 100% { transform: translateY(0) rotate(-2deg); }
@@ -421,19 +441,26 @@
       content: ''; position: absolute; inset: 0 0 auto 0; height: 10px;
       background: var(--swatch, var(--pink));
     }
-    .flavour-scoop {
-      width: 84px; height: 84px; margin: 6px auto 18px; border-radius: 50% 50% 46% 46%;
-      background: var(--swatch, var(--pink));
-      position: relative;
-      box-shadow: inset -10px -12px 0 rgba(58,35,24,0.14), 0 6px 0 rgba(58,35,24,0.2);
+    .flavour-art {
+      width: 104px; height: auto; display: block;
+      margin: 2px auto 14px;
+      filter: drop-shadow(0 8px 10px rgba(58,35,24,0.18));
       transition: transform 0.35s var(--ease-bounce);
     }
-    .flavour-card:hover .flavour-scoop { transform: scale(1.12) rotate(-6deg); }
-    .flavour-scoop::after {
-      content: ''; position: absolute; top: 16px; left: 18px;
-      width: 20px; height: 12px; border-radius: 50%;
-      background: rgba(255,255,255,0.55); transform: rotate(-20deg);
+    .flavour-card:hover .flavour-art { transform: scale(1.12) rotate(-5deg); }
+
+    .fotw-banner {
+      margin-top: 34px;
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      background: linear-gradient(100deg, #FFF1D6, #FFE0EC, #D9F6EF);
+      background-size: 220% 100%;
+      animation: gradient-slide 8s linear infinite alternate;
+      border: 3px solid var(--choc); border-radius: 18px;
+      box-shadow: 6px 6px 0 var(--choc);
+      padding: 16px 24px; font-size: 1.08rem;
     }
+    .fotw-banner .fotw-star { font-size: 1.6rem; animation: bob 2.6s ease-in-out infinite; }
+    .fotw-banner strong { color: var(--pink-deep); font-size: 1.15em; }
     .flavour-card h3 { font-size: 1.15rem; margin-bottom: 6px; }
     .flavour-card p { font-size: 0.92rem; color: var(--choc-soft); line-height: 1.45; }
 
@@ -707,35 +734,95 @@
             <text x="100" y="112" text-anchor="middle" font-size="38">🍦</text>
           </svg>
 
+          <!-- Ambient morphing blobs -->
+          <div class="blob blob-1" aria-hidden="true"></div>
+          <div class="blob blob-2" aria-hidden="true"></div>
+
           <!-- Triple-scoop cone -->
-          <svg class="cone-float" viewBox="0 0 320 500" role="img" aria-label="Triple scoop ice cream cone">
+          <svg class="cone-float" viewBox="0 0 320 520" role="img" aria-label="Triple scoop ice cream cone">
             <defs>
               <pattern id="waffle" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                 <rect width="26" height="26" fill="#E8A25C" />
                 <path d="M0 0H26M0 13H26M0 0V26M13 0V26" stroke="#C77E3B" stroke-width="4" />
               </pattern>
+              <linearGradient id="coneShine" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#FFD9A3" stop-opacity="0.75" />
+                <stop offset="0.45" stop-color="#FFD9A3" stop-opacity="0" />
+                <stop offset="1" stop-color="#8A5A2E" stop-opacity="0.35" />
+              </linearGradient>
+              <radialGradient id="mintGrad" cx="0.35" cy="0.28" r="1">
+                <stop offset="0" stop-color="#A8EEDD" />
+                <stop offset="0.55" stop-color="#4FC9B1" />
+                <stop offset="1" stop-color="#2E9E88" />
+              </radialGradient>
+              <radialGradient id="pinkGrad" cx="0.35" cy="0.28" r="1">
+                <stop offset="0" stop-color="#FFA5C2" />
+                <stop offset="0.55" stop-color="#FF5D8F" />
+                <stop offset="1" stop-color="#D63A72" />
+              </radialGradient>
+              <radialGradient id="carGrad" cx="0.35" cy="0.28" r="1">
+                <stop offset="0" stop-color="#FFD59B" />
+                <stop offset="0.55" stop-color="#FFAE52" />
+                <stop offset="1" stop-color="#E08A2E" />
+              </radialGradient>
+              <radialGradient id="cherryGrad" cx="0.35" cy="0.3" r="1">
+                <stop offset="0" stop-color="#FF7FA8" />
+                <stop offset="1" stop-color="#C92B60" />
+              </radialGradient>
+              <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#3A2318" flood-opacity="0.22" />
+              </filter>
             </defs>
+
+            <!-- ground shadow -->
+            <ellipse cx="160" cy="500" rx="92" ry="14" fill="#3A2318" opacity="0.14">
+              <animate attributeName="rx" values="92;78;92" dur="4.5s" repeatCount="indefinite" />
+            </ellipse>
+
             <!-- drips falling -->
             <circle class="drip-drop" cx="120" cy="330" r="7" fill="#FFAE52" />
             <circle class="drip-drop d2" cx="200" cy="335" r="6" fill="#FF5D8F" />
             <circle class="drip-drop d3" cx="160" cy="340" r="8" fill="#4FC9B1" />
-            <!-- cone -->
-            <path d="M96 268 L224 268 L165 478 Q160 490 155 478 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="6" stroke-linejoin="round" />
-            <!-- bottom scoop: caramel -->
-            <circle cx="160" cy="240" r="76" fill="#FFAE52" stroke="#3A2318" stroke-width="6" />
-            <path d="M92 262 q10 22 24 6 q12 20 24 4 q12 18 24 4 q12 16 24 2 q12 14 22 0 q10 12 18 -4" fill="none" stroke="#3A2318" stroke-width="0" />
-            <!-- middle scoop: strawberry -->
-            <circle cx="160" cy="164" r="66" fill="#FF5D8F" stroke="#3A2318" stroke-width="6" />
-            <!-- top scoop: mint -->
-            <circle cx="160" cy="96" r="56" fill="#4FC9B1" stroke="#3A2318" stroke-width="6" />
-            <!-- highlights -->
-            <ellipse cx="138" cy="80" rx="14" ry="9" fill="#fff" opacity="0.55" transform="rotate(-24 138 80)" />
-            <ellipse cx="134" cy="150" rx="15" ry="9" fill="#fff" opacity="0.45" transform="rotate(-24 134 150)" />
-            <ellipse cx="132" cy="228" rx="16" ry="10" fill="#fff" opacity="0.45" transform="rotate(-24 132 228)" />
-            <!-- cherry -->
-            <path d="M172 34 Q186 12 204 10" fill="none" stroke="#3A2318" stroke-width="5" stroke-linecap="round" />
-            <circle cx="170" cy="42" r="15" fill="#E8437A" stroke="#3A2318" stroke-width="5" />
-            <ellipse cx="165" cy="37" rx="5" ry="3" fill="#fff" opacity="0.6" />
+
+            <g filter="url(#softGlow)">
+              <!-- cone -->
+              <path d="M96 268 L224 268 L165 478 Q160 490 155 478 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="6" stroke-linejoin="round" />
+              <path d="M96 268 L224 268 L165 478 Q160 490 155 478 Z" fill="url(#coneShine)" stroke="none" />
+
+              <!-- bottom scoop: caramel -->
+              <circle cx="160" cy="240" r="76" fill="url(#carGrad)" stroke="#3A2318" stroke-width="6" />
+              <!-- caramel melt over cone -->
+              <path d="M103 265 q6 24 17 8 q9 22 20 6 q9 20 20 5 q10 18 20 4 q10 16 19 2 q9 13 16 -3 l2 -18 l-112 0 Z" fill="url(#carGrad)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round" />
+
+              <!-- middle scoop: strawberry -->
+              <circle cx="160" cy="164" r="66" fill="url(#pinkGrad)" stroke="#3A2318" stroke-width="6" />
+              <!-- strawberry melt over caramel -->
+              <path d="M112 185 q7 22 17 7 q9 19 19 5 q10 18 20 4 q10 16 19 3 q9 12 15 -4 l2 -16 l-92 0 Z" fill="url(#pinkGrad)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round" />
+
+              <!-- top scoop: mint -->
+              <circle cx="160" cy="96" r="56" fill="url(#mintGrad)" stroke="#3A2318" stroke-width="6" />
+              <!-- mint melt over strawberry -->
+              <path d="M120 112 q6 20 15 6 q8 17 17 4 q9 16 18 3 q9 13 15 -2 l2 -13 l-67 0 Z" fill="url(#mintGrad)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round" />
+              <!-- chocolate chips on mint -->
+              <circle cx="146" cy="72" r="4.5" fill="#3A2318" /><circle cx="178" cy="88" r="4" fill="#3A2318" /><circle cx="158" cy="108" r="4" fill="#3A2318" /><circle cx="188" cy="66" r="3.5" fill="#3A2318" />
+
+              <!-- highlights -->
+              <ellipse cx="138" cy="76" rx="15" ry="9" fill="#fff" opacity="0.6" transform="rotate(-24 138 76)" />
+              <ellipse cx="132" cy="148" rx="16" ry="9" fill="#fff" opacity="0.5" transform="rotate(-24 132 148)" />
+              <ellipse cx="128" cy="224" rx="17" ry="10" fill="#fff" opacity="0.5" transform="rotate(-24 128 224)" />
+
+              <!-- cherry -->
+              <path d="M172 34 Q186 12 204 10" fill="none" stroke="#3A2318" stroke-width="5" stroke-linecap="round" />
+              <circle cx="170" cy="42" r="15" fill="url(#cherryGrad)" stroke="#3A2318" stroke-width="5" />
+              <ellipse cx="165" cy="37" rx="5" ry="3" fill="#fff" opacity="0.65" />
+            </g>
+
+            <!-- sparkles -->
+            <g fill="#FFD93D" class="sparkles">
+              <path d="M62 120 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 Z"><animate attributeName="opacity" values="1;0.15;1" dur="2.2s" repeatCount="indefinite" /></path>
+              <path d="M258 190 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z"><animate attributeName="opacity" values="0.2;1;0.2" dur="2.8s" repeatCount="indefinite" /></path>
+              <path d="M246 60 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 Z"><animate attributeName="opacity" values="1;0.2;1" dur="3.4s" repeatCount="indefinite" /></path>
+            </g>
           </svg>
 
           <span class="float-emoji" style="top:14%;left:-4%;animation-delay:0.6s;">🍓</span>
@@ -794,44 +881,112 @@
           </p>
         </div>
 
+        <div class="fotw-banner reveal" role="note">
+          <span class="fotw-star" aria-hidden="true">🌟</span>
+          <span>Flavour of the week: <strong id="fotw">Salted Caramel</strong> — ask for a taste at the window!</span>
+        </div>
+
         <div class="flavours-grid reveal-stagger">
-          <article class="flavour-card" style="--swatch:#D2691E;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+          <article class="flavour-card" style="--swatch:#8B5E3C;">
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg1" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#A97A50"/><stop offset="0.55" stop-color="#8B5E3C"/><stop offset="1" stop-color="#5E3A21"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg1)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg1)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M40 50 q20 -18 40 -4" stroke="#E0A968" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <path d="M46 62 q14 -10 28 -2" stroke="#E0A968" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <ellipse cx="46" cy="36" rx="8" ry="5" fill="#fff" opacity="0.5" transform="rotate(-24 46 36)"/>
+            </svg>
             <h3>Peanut Butter Chocolate</h3>
             <p>Rich chocolate swirled with ribbons of real peanut butter. The local legend.</p>
           </article>
           <article class="flavour-card" style="--swatch:#FF8FAB;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg2" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFF4DE"/><stop offset="0.55" stop-color="#F5E3C0"/><stop offset="1" stop-color="#D9B98C"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg2)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg2)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <circle cx="50" cy="46" r="5" fill="#D6335F"/><circle cx="70" cy="58" r="4.5" fill="#D6335F"/><circle cx="66" cy="36" r="4" fill="#D6335F"/>
+              <rect x="42" y="60" width="6" height="4" rx="1" fill="#B98A4E" transform="rotate(18 45 62)"/>
+              <rect x="58" y="66" width="5" height="4" rx="1" fill="#B98A4E" transform="rotate(-14 60 68)"/>
+              <ellipse cx="46" cy="34" rx="8" ry="5" fill="#fff" opacity="0.6" transform="rotate(-24 46 34)"/>
+            </svg>
             <h3>New York Cherry Cheesecake</h3>
             <p>Creamy cheesecake ice cream loaded with cherries and graham crumble.</p>
           </article>
           <article class="flavour-card" style="--swatch:#E8B14E;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg3" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFCF8A"/><stop offset="0.55" stop-color="#E8A94E"/><stop offset="1" stop-color="#B87A2A"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg3)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg3)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M38 44 q22 -14 44 2 M44 58 q16 -8 32 0" stroke="#7A4A1E" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+              <circle cx="52" cy="38" r="1.8" fill="#fff"/><circle cx="68" cy="48" r="1.8" fill="#fff"/><circle cx="58" cy="64" r="1.8" fill="#fff"/><circle cx="74" cy="60" r="1.6" fill="#fff"/>
+              <ellipse cx="46" cy="34" rx="8" ry="5" fill="#fff" opacity="0.5" transform="rotate(-24 46 34)"/>
+            </svg>
             <h3>Salted Caramel</h3>
             <p>Buttery caramel with the perfect pinch of sea salt. Dangerously smooth.</p>
           </article>
           <article class="flavour-card" style="--swatch:#FF9E3D;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg4" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFC078"/><stop offset="0.55" stop-color="#FF9E3D"/><stop offset="1" stop-color="#E67614"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg4)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg4)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M34 48 q26 -16 52 0" stroke="#2B1B12" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M40 62 q20 -10 40 -1" stroke="#2B1B12" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <ellipse cx="46" cy="33" rx="8" ry="5" fill="#fff" opacity="0.5" transform="rotate(-24 46 33)"/>
+            </svg>
             <h3>Tiger Tail</h3>
             <p>Orange and black licorice — the classic Canadian campground flavour.</p>
           </article>
           <article class="flavour-card" style="--swatch:#8B5A2B;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg5" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFFBEE"/><stop offset="0.55" stop-color="#FFF3DC"/><stop offset="1" stop-color="#E8D2A8"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg5)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg5)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M36 46 q24 -14 48 4 M42 60 q18 -8 36 2" stroke="#5A3A22" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+              <circle cx="52" cy="40" r="5.5" fill="#C98A3B" stroke="#8B5E3C" stroke-width="2"/>
+              <circle cx="72" cy="56" r="5" fill="#C98A3B" stroke="#8B5E3C" stroke-width="2"/>
+              <ellipse cx="46" cy="33" rx="8" ry="5" fill="#fff" opacity="0.7" transform="rotate(-24 46 33)"/>
+            </svg>
             <h3>Moose Tracks</h3>
             <p>Vanilla packed with fudge and peanut butter cups. Follow the tracks.</p>
           </article>
           <article class="flavour-card" style="--swatch:#7FD8C4;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg6" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#B8F2E3"/><stop offset="0.55" stop-color="#7FD8C4"/><stop offset="1" stop-color="#46B49B"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg6)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg6)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <circle cx="50" cy="42" r="3.5" fill="#3A2318"/><circle cx="68" cy="38" r="3" fill="#3A2318"/><circle cx="60" cy="56" r="3.2" fill="#3A2318"/><circle cx="74" cy="52" r="2.8" fill="#3A2318"/><circle cx="44" cy="58" r="2.6" fill="#3A2318"/>
+              <ellipse cx="46" cy="33" rx="8" ry="5" fill="#fff" opacity="0.6" transform="rotate(-24 46 33)"/>
+            </svg>
             <h3>Mint Chip</h3>
             <p>Cool mint studded with dark chocolate chips. Refreshment, upgraded.</p>
           </article>
           <article class="flavour-card" style="--swatch:#9BD1FF;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg7" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#C4E3FB"/><stop offset="0.55" stop-color="#8FC7F5"/><stop offset="1" stop-color="#5B9FD8"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg7)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg7)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <circle cx="50" cy="42" r="4.5" fill="#FF5D8F"/><circle cx="68" cy="38" r="4.5" fill="#FFD93D"/><circle cx="60" cy="58" r="4.5" fill="#62D98A"/><circle cx="74" cy="54" r="4" fill="#C9A0FF"/>
+              <ellipse cx="46" cy="33" rx="8" ry="5" fill="#fff" opacity="0.6" transform="rotate(-24 46 33)"/>
+            </svg>
             <h3>Bubblegum</h3>
             <p>Bright, sweet, and packed with gumballs — the kids' hall-of-famer.</p>
           </article>
           <article class="flavour-card" style="--swatch:#C9A0FF;">
-            <div class="flavour-scoop" aria-hidden="true"></div>
+            <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
+              <defs><radialGradient id="fg8" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFD3EA"/><stop offset="0.55" stop-color="#FFB3D9"/><stop offset="1" stop-color="#F286BE"/></radialGradient></defs>
+              <path d="M38 76 L82 76 L63 124 Q60 130 57 124 Z" fill="url(#waffle)" stroke="#3A2318" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="60" cy="52" r="32" fill="url(#fg8)" stroke="#3A2318" stroke-width="5"/>
+              <path d="M32 70 q5 14 12 4 q6 12 13 3 q7 11 13 2 q7 9 12 1 q6 7 10 -3 l0 -14 l-60 0 Z" fill="url(#fg8)" stroke="#3A2318" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M36 46 q24 -16 48 -2 M42 60 q18 -10 36 -2" stroke="#A5D8FF" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.9"/>
+              <ellipse cx="46" cy="33" rx="8" ry="5" fill="#fff" opacity="0.6" transform="rotate(-24 46 33)"/>
+            </svg>
             <h3>Cotton Candy</h3>
             <p>Carnival vibes in a cone. Tastes exactly like the midway smells.</p>
           </article>
@@ -1127,6 +1282,16 @@
       }
       updateStatus();
       setInterval(updateStatus, 60000);
+
+      /* ---------- Flavour of the week (rotates automatically every Monday) ---------- */
+      var FLAVOURS = [
+        'Peanut Butter Chocolate', 'New York Cherry Cheesecake', 'Salted Caramel',
+        'Tiger Tail', 'Moose Tracks', 'Mint Chip', 'Bubblegum', 'Cotton Candy',
+        'Maple Walnut', 'Rocky Road', 'Chocolate Fudge Brownie', 'Strawberry',
+        'Cookies & Cream', 'Butterscotch Ripple', 'Black Cherry', 'Orange Pineapple'
+      ];
+      var weekIndex = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+      document.getElementById('fotw').textContent = FLAVOURS[weekIndex % FLAVOURS.length];
 
       /* ---------- Dynamic year + years-scooping ---------- */
       var yr = new Date().getFullYear();
