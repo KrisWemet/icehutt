@@ -1,0 +1,20 @@
+# The Ice Hut
+
+> Family-owned ice cream shop in Morinville, Alberta, Canada, serving premium Foothills Creamery ice cream since 1995. Known for 48 rotating flavours, famously generous scoops, milkshakes, sundaes, gluten-free options, and $2.25 Puppy Cones for dogs.
+
+## Key facts
+
+- Address: 9911 100 Street, Morinville, Alberta, T8R 1R4, Canada (about 20 minutes north of Edmonton)
+- Phone: 780-819-9726
+- Email: dawn@morinvilleicehut.ca
+- Hours: Monday–Friday 4:00pm–9:00pm; Saturday–Sunday 12:00pm–9:00pm
+- Founded: 1995, family-owned and operated
+- Ice cream: premium Foothills Creamery (made in Alberta), 48 rotating flavours
+- Popular flavours: peanut butter chocolate, New York cherry cheesecake, salted caramel
+- Dietary: gluten-free options available
+- Dog-friendly: Puppy Cone available for $2.25
+- Facebook: https://www.facebook.com/morinvilleicehut/
+
+## Pages
+
+- [Home](https://morinvilleicehut.ca/): flavours, menu, hours, location, and FAQ
