@@ -646,6 +646,23 @@
     .story-points strong { display: block; font-size: 1.05rem; }
     .story-points span.desc { color: var(--choc-soft); font-size: 0.95rem; }
 
+    /* ============ Reviews ============ */
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px;
+      max-width: 900px; margin: 48px auto 0;
+    }
+    .review-card {
+      background: #fff; border: 3px solid var(--choc); border-radius: var(--radius);
+      box-shadow: var(--shadow-pop); padding: 28px 30px; margin: 0;
+      transition: transform 0.3s var(--ease-bounce);
+    }
+    .review-card:hover { transform: translateY(-6px) rotate(-0.5deg); }
+    .review-stars { color: #F5A623; font-size: 1.25rem; letter-spacing: 3px; margin-bottom: 12px; }
+    .review-card p { font-size: 1.06rem; line-height: 1.55; }
+    .review-card footer { margin-top: 14px; font-weight: 600; color: var(--choc-soft); font-size: 0.92rem; }
+    .reviews-cta { text-align: center; margin-top: 40px; }
+    @media (max-width: 700px) { .reviews-grid { grid-template-columns: 1fr; } }
+
     /* ============ Visit ============ */
     .visit { background: var(--cream-2); }
     .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; }
@@ -807,6 +824,7 @@
           <li><a href="#flavours">Flavours</a></li>
           <li><a href="#menu">Menu</a></li>
           <li><a href="#builder">Cone Lab</a></li>
+          <li><a href="#reviews">Reviews</a></li>
           <li><a href="#story">Our Story</a></li>
           <li><a href="#visit">Visit</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -1239,6 +1257,41 @@
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ Reviews ============ -->
+    <section id="reviews" aria-labelledby="reviews-title">
+      <div class="wrap">
+        <div class="reveal" style="text-align:center;">
+          <p class="section-kicker">Don't take our word for it</p>
+          <h2 class="section-title" id="reviews-title">Loved by locals ⭐</h2>
+        </div>
+        <div class="reviews-grid reveal-stagger">
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <p>"A single scoop is more like 4 scoops. The most bang for your buck."</p>
+            <footer>— Google review</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <p>"THE BEST ice cream shop around. Family-run with wonderful staff."</p>
+            <footer>— Google review</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <p>"The amount of unique flavours is remarkable — and they're great with gluten-free needs."</p>
+            <footer>— Google review</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <p>"Adorable spot with a big grassy area and picnic benches under umbrellas."</p>
+            <footer>— Google review</footer>
+          </blockquote>
+        </div>
+        <p class="reviews-cta reveal">
+          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=The+Ice+Hut+9911+100+Street+Morinville+AB" target="_blank" rel="noopener">Read all our Google reviews →</a>
+        </p>
       </div>
     </section>
 
