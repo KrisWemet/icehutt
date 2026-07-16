@@ -42,6 +42,11 @@ A modern, animation-rich redesign concept for [The Ice Hut](https://morinvilleic
 - Semantic HTML, descriptive headings, an on-page FAQ that mirrors the schema
 - Accessible: skip link, focus states, aria labels, keyboard-friendly accordions
 
-## ⚠️ Before going live
+## ✅ Fact-checked against the original site
 
-Menu prices other than the Puppy Cone ($2.25) and Kids Single ($4.50) are **placeholders** — update them in the Menu section of `index.html`. Same goes for the flavour list: swap in whatever's actually in the freezer.
+Hours (seasonal May–September schedule), address, phone, menu items and prices, flavour names, and the "Cold Treats & Other Eats" tagline were all verified against morinvilleicehut.ca (captured in `site-reference/`). Review snippets come from real public customer reviews.
+
+**Discrepancies found on the original site worth telling the owner about:**
+- `www.morinvilleicehut.ca` has an invalid TLS certificate (browsers warn on the `www` address; the bare domain is fine)
+- The homepage says "since 1995" but the About page says "since 1997"
+- The Menu page footer shows phone (780) 819-9726 while every other page shows (780) 974-9944 (this redesign uses 974-9944)
