@@ -16,42 +16,82 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Fetch pages and images from morinvilleicehut.ca
+      - name: Install Playwright
         run: |
-          set -uo pipefail
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          npm init -y >/dev/null
+          npm i playwright >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+
+      - name: Render pages with a real browser and capture content
+        run: |
           mkdir -p site-reference/images
-          for page in "" "Menu" "about" "Contact" "Gallery" "gallery"; do
-            name="${page:-home}"
-            echo "--- fetching /$page"
-            curl -fsSL -A "$UA" -H "Accept: text/html" --max-time 60 \
-              "https://www.morinvilleicehut.ca/$page" -o "site-reference/${name}.html" \
-              || echo "failed: /$page"
-          done
-          ls -la site-reference/
-          # pull image URLs referenced by the pages (same-site + common CDNs)
-          grep -hoE '(https?:)?//[^"'\'' >]+\.(jpe?g|png|webp)' site-reference/*.html 2>/dev/null \
-            | sed 's|^//|https://|' | sort -u | head -40 > site-reference/image-urls.txt || true
-          echo "found $(wc -l < site-reference/image-urls.txt) image urls"
-          i=0
-          while read -r url; do
-            i=$((i+1))
-            ext="${url##*.}"
-            curl -fsSL -A "$UA" --max-time 60 -o "site-reference/images/img${i}.${ext%%\?*}" "$url" \
-              || echo "failed: $url"
-          done < site-reference/image-urls.txt
-          # drop tiny files (icons, trackers)
-          find site-reference/images -type f -size -8k -delete || true
-          ls -la site-reference/images/ || true
+          cat > scrape.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'fs';
+
+          const pages = [
+            ['home', 'https://www.morinvilleicehut.ca/'],
+            ['menu', 'https://www.morinvilleicehut.ca/Menu'],
+            ['about', 'https://www.morinvilleicehut.ca/about'],
+            ['contact', 'https://www.morinvilleicehut.ca/Contact'],
+          ];
+
+          const browser = await chromium.launch();
+          const ctx = await browser.newContext({
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+            viewport: { width: 1440, height: 900 },
+            locale: 'en-CA',
+          });
+          const page = await ctx.newPage();
+          const seen = new Set();
+          let imgIdx = 0;
+
+          for (const [name, url] of pages) {
+            try {
+              const resp = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+              console.log(name, '->', resp && resp.status());
+              await page.waitForTimeout(2500);
+              fs.writeFileSync(`site-reference/${name}.html`, await page.content());
+              fs.writeFileSync(`site-reference/${name}.txt`, await page.evaluate(() => document.body.innerText));
+              await page.screenshot({ path: `site-reference/${name}.png`, fullPage: true });
+
+              const imgs = await page.evaluate(() =>
+                [...document.querySelectorAll('img')]
+                  .map(i => ({ src: i.currentSrc || i.src, w: i.naturalWidth, h: i.naturalHeight, alt: i.alt || '' }))
+                  .filter(i => i.src && i.w >= 200 && i.h >= 150)
+              );
+              for (const im of imgs) {
+                if (seen.has(im.src)) continue;
+                seen.add(im.src);
+                try {
+                  const r = await ctx.request.get(im.src, { timeout: 30000 });
+                  if (!r.ok()) continue;
+                  const ct = r.headers()['content-type'] || '';
+                  const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : 'jpg';
+                  imgIdx += 1;
+                  fs.writeFileSync(`site-reference/images/img${imgIdx}.${ext}`, await r.body());
+                  fs.appendFileSync('site-reference/image-manifest.txt', `img${imgIdx}.${ext}\t${im.w}x${im.h}\t${im.alt}\t${im.src}\n`);
+                } catch (e) { console.log('img failed:', im.src); }
+              }
+            } catch (e) {
+              console.log(name, 'FAILED:', String(e).slice(0, 200));
+            }
+          }
+          await browser.close();
+          EOF
+          node scrape.mjs
+          ls -la site-reference/ site-reference/images/ || true
 
       - name: Commit reference material
         run: |
+          rm -f package.json package-lock.json scrape.mjs
+          rm -rf node_modules
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A site-reference
           if git diff --cached --quiet; then
             echo "Nothing fetched."
           else
-            git commit -m "Fetch reference pages and images from the original site"
+            git commit -m "Fetch reference pages and images from the original site (browser render)"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
