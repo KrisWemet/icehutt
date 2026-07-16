@@ -1,0 +1,57 @@
+name: Fetch original site reference
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/fetch-site-reference.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch pages and images from morinvilleicehut.ca
+        run: |
+          set -uo pipefail
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          mkdir -p site-reference/images
+          for page in "" "Menu" "about" "Contact" "Gallery" "gallery"; do
+            name="${page:-home}"
+            echo "--- fetching /$page"
+            curl -fsSL -A "$UA" -H "Accept: text/html" --max-time 60 \
+              "https://www.morinvilleicehut.ca/$page" -o "site-reference/${name}.html" \
+              || echo "failed: /$page"
+          done
+          ls -la site-reference/
+          # pull image URLs referenced by the pages (same-site + common CDNs)
+          grep -hoE '(https?:)?//[^"'\'' >]+\.(jpe?g|png|webp)' site-reference/*.html 2>/dev/null \
+            | sed 's|^//|https://|' | sort -u | head -40 > site-reference/image-urls.txt || true
+          echo "found $(wc -l < site-reference/image-urls.txt) image urls"
+          i=0
+          while read -r url; do
+            i=$((i+1))
+            ext="${url##*.}"
+            curl -fsSL -A "$UA" --max-time 60 -o "site-reference/images/img${i}.${ext%%\?*}" "$url" \
+              || echo "failed: $url"
+          done < site-reference/image-urls.txt
+          # drop tiny files (icons, trackers)
+          find site-reference/images -type f -size -8k -delete || true
+          ls -la site-reference/images/ || true
+
+      - name: Commit reference material
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A site-reference
+          if git diff --cached --quiet; then
+            echo "Nothing fetched."
+          else
+            git commit -m "Fetch reference pages and images from the original site"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
