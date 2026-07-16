@@ -30,10 +30,10 @@ jobs:
           import fs from 'fs';
 
           const pages = [
-            ['home', 'https://www.morinvilleicehut.ca/'],
-            ['menu', 'https://www.morinvilleicehut.ca/Menu'],
-            ['about', 'https://www.morinvilleicehut.ca/about'],
-            ['contact', 'https://www.morinvilleicehut.ca/Contact'],
+            ['home', 'https://morinvilleicehut.ca/'],
+            ['menu', 'https://morinvilleicehut.ca/Menu'],
+            ['about', 'https://morinvilleicehut.ca/about'],
+            ['contact', 'https://morinvilleicehut.ca/Contact'],
           ];
 
           const browser = await chromium.launch();
