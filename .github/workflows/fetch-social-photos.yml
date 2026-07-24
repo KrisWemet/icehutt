@@ -1,0 +1,101 @@
+name: Fetch business photos from public profiles
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/fetch-social-photos.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null
+          npm i playwright >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+
+      - name: Scrape public photos (Facebook page + Google Maps place)
+        run: |
+          mkdir -p social-photos
+          cat > grab.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'fs';
+
+          const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
+          const browser = await chromium.launch();
+          const ctx = await browser.newContext({ userAgent: UA, viewport: { width: 1400, height: 1000 }, locale: 'en-CA' });
+          const page = await ctx.newPage();
+
+          const found = new Map(); // url -> {w,h,src}
+          let idx = 0;
+
+          async function harvest(label, url, waitMs = 6000, scrolls = 6) {
+            try {
+              console.log('=== ' + label + ' -> ' + url);
+              const r = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
+              console.log(label, 'status', r && r.status());
+              await page.waitForTimeout(waitMs);
+              for (let i = 0; i < scrolls; i++) {
+                await page.mouse.wheel(0, 1600);
+                await page.waitForTimeout(1200);
+              }
+              await page.screenshot({ path: `social-photos/_view-${label}.png`, fullPage: false });
+              const imgs = await page.evaluate(() =>
+                [...document.querySelectorAll('img')]
+                  .map(i => ({ src: i.currentSrc || i.src, w: i.naturalWidth, h: i.naturalHeight, alt: i.alt || '' }))
+                  .filter(i => i.src && i.src.startsWith('http') && i.w >= 400 && i.h >= 300)
+              );
+              console.log(label, 'candidate images:', imgs.length);
+              for (const im of imgs) if (!found.has(im.src)) found.set(im.src, { ...im, label });
+            } catch (e) {
+              console.log(label, 'FAILED:', String(e).slice(0, 200));
+            }
+          }
+
+          await harvest('fb-photos', 'https://www.facebook.com/morinvilleicehut/photos', 8000, 8);
+          await harvest('fb-page', 'https://www.facebook.com/morinvilleicehut/', 8000, 8);
+          await harvest('gmaps', 'https://www.google.com/maps/place/The+Ice+Hut/@53.7909,-113.6497,17z', 9000, 4);
+          await harvest('gsearch-img', 'https://www.bing.com/images/search?q=%22The+Ice+Hut%22+Morinville+ice+cream', 7000, 4);
+
+          console.log('TOTAL unique candidates:', found.size);
+          for (const [src, meta] of found) {
+            try {
+              const resp = await ctx.request.get(src, { timeout: 40000 });
+              if (!resp.ok()) continue;
+              const ct = resp.headers()['content-type'] || '';
+              if (!ct.startsWith('image/')) continue;
+              const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : 'jpg';
+              const body = await resp.body();
+              if (body.length < 20000) continue;
+              idx += 1;
+              fs.writeFileSync(`social-photos/p${idx}.${ext}`, body);
+              fs.appendFileSync('social-photos/manifest.tsv', `p${idx}.${ext}\t${meta.label}\t${meta.w}x${meta.h}\t${meta.alt}\t${src}\n`);
+            } catch (e) { /* skip */ }
+          }
+          console.log('SAVED:', idx);
+          await browser.close();
+          EOF
+          node grab.mjs || true
+          ls -la social-photos/ || true
+
+      - name: Commit results
+        run: |
+          rm -f package.json package-lock.json grab.mjs
+          rm -rf node_modules
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A social-photos
+          if git diff --cached --quiet; then
+            echo "Nothing captured."
+          else
+            git commit -m "Capture candidate business photos from public profiles"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
