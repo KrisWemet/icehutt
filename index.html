@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary SEO -->
-  <title>The Ice Hut | Ice Cream Shop in Morinville, Alberta — Family-Owned Since 1995</title>
+  <title>The Ice Hut | Ice Cream Shop in Morinville, Alberta, Family-Owned Since 1995</title>
   <meta name="description" content="The Ice Hut is Morinville's family-owned ice cream shop, scooping premium Foothills Creamery ice cream since 1995. Cold treats & other eats: 75+ flavours, legendary big scoops, milkshakes, floats & Puppy Cones. Visit us at 9911 100 Street, Morinville, AB." />
   <link rel="canonical" href="https://morinvilleicehut.ca/" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -16,7 +16,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The Ice Hut" />
-  <meta property="og:title" content="The Ice Hut — Morinville's Ice Cream Shop Since 1995" />
+  <meta property="og:title" content="The Ice Hut: Morinville's Ice Cream Shop Since 1995" />
   <meta property="og:description" content="75+ flavours of premium Foothills Creamery ice cream, scooped big. Family-owned in Morinville, Alberta since 1995." />
   <meta property="og:url" content="https://morinvilleicehut.ca/" />
   <meta property="og:image" content="https://morinvilleicehut.ca/og-image.png" />
@@ -26,7 +26,7 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Ice Hut — Morinville's Ice Cream Shop Since 1995" />
+  <meta name="twitter:title" content="The Ice Hut: Morinville's Ice Cream Shop Since 1995" />
   <meta name="twitter:description" content="75+ flavours. Legendary scoops. Family-owned since 1995. Morinville, Alberta." />
   <meta name="twitter:image" content="https://morinvilleicehut.ca/og-image.png" />
 
@@ -125,7 +125,7 @@
         "name": "Where is The Ice Hut located?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Ice Hut is at 9911 100 Street, Morinville, Alberta, T8R 1R4 — right in the heart of town, about 20 minutes north of Edmonton."
+          "text": "The Ice Hut is at 9911 100 Street, Morinville, Alberta, T8R 1R4, right in the heart of town (about 20 minutes north of Edmonton)."
         }
       },
       {
@@ -141,7 +141,7 @@
         "name": "What kind of ice cream does The Ice Hut serve?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We scoop premium Foothills Creamery ice cream — an Alberta favourite — with 75+ rotating flavours, from classics like Chocolate and Tiger to Sea Salt Caramel Fudge and New York Cherry Cheesecake."
+          "text": "We scoop premium Foothills Creamery ice cream, an Alberta favourite, with 75+ rotating flavours: from classics like Chocolate and Tiger to Sea Salt Caramel Fudge and New York Cherry Cheesecake."
         }
       },
       {
@@ -157,7 +157,7 @@
         "name": "Can I bring my dog to The Ice Hut?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Absolutely — four-legged friends are welcome, and we serve a Puppy Cone made just for them for $2.25."
+          "text": "Absolutely, four-legged friends are welcome, and we serve a Puppy Cone made just for them for $2.25."
         }
       },
       {
@@ -165,7 +165,7 @@
         "name": "How long has The Ice Hut been open?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Ice Hut has been family-owned and scooping in Morinville since 1995 — over three decades of summers."
+          "text": "The Ice Hut has been family-owned and scooping in Morinville since 1995, over three decades of summers."
         }
       }
     ]
@@ -175,12 +175,12 @@
   <style>
     /* ============ Design tokens ============ */
     :root {
-      --cream: #FFF7EE;
-      --cream-2: #FFEDD9;
+      --cream: #EFFAF5;
+      --cream-2: #DCF3E9;
       --choc: #3A2318;
       --choc-soft: #6B4630;
       --pink: #FF5D8F;
-      --pink-deep: #E8437A;
+      --pink-deep: #A81E52;
       --pink-soft: #FFD3E1;
       --mint: #4FC9B1;
       --mint-soft: #C9F2E9;
@@ -204,10 +204,9 @@
       background: var(--cream);
       color: var(--choc);
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
-    ::selection { background: var(--pink); color: #fff; }
+    ::selection { background: var(--pink); color: var(--choc); }
 
     .skip-link {
       position: absolute; left: -9999px; top: 0;
@@ -227,15 +226,14 @@
     /* ============ Header ============ */
     .site-header {
       position: fixed; inset: 0 0 auto 0; z-index: 100;
-      transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
-      padding: 18px 0;
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+      padding: 14px 0;
     }
     .site-header.scrolled {
-      background: rgba(255, 247, 238, 0.85);
+      background: rgba(239, 250, 245, 0.85);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       box-shadow: 0 4px 30px -10px rgba(58, 35, 24, 0.25);
-      padding: 10px 0;
     }
     .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand {
@@ -312,11 +310,12 @@
       animation: drop-in 0.8s 0.1s var(--ease-bounce) both;
     }
     .hero h1 .gradient-word {
-      background: linear-gradient(90deg, var(--pink) 0%, var(--caramel) 30%, var(--mint) 60%, var(--berry) 90%);
-      background-size: 300% 100%;
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent; color: transparent;
-      animation: gradient-slide 6s linear infinite;
+      color: var(--pink-deep);
+      text-decoration: underline;
+      text-decoration-style: wavy;
+      text-decoration-color: var(--caramel);
+      text-decoration-thickness: 3px;
+      text-underline-offset: 10px;
     }
     @keyframes gradient-slide {
       0% { background-position: 0% 50%; }
@@ -341,7 +340,7 @@
     }
     .btn:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--choc); }
     .btn:active { transform: translateY(2px); box-shadow: 0 3px 0 var(--choc); }
-    .btn-primary { background: var(--pink); color: #fff; }
+    .btn-primary { background: var(--pink); color: var(--choc); }
     .btn-ghost { background: #fff; color: var(--choc); }
 
     @keyframes drop-in {
@@ -430,25 +429,22 @@
       animation: bob 2.4s ease-in-out infinite;
     }
 
-    /* ============ Marquee ============ */
-    .marquee {
+    /* ============ Facts strip ============ */
+    .facts-strip {
       background: var(--choc); color: var(--cream);
-      overflow: hidden; padding: 16px 0;
-      transform: rotate(-1deg) scale(1.02);
-      border-block: 4px solid var(--choc);
+      padding: 22px 24px;
     }
-    .marquee-track {
-      display: flex; gap: 48px; width: max-content;
-      animation: marquee 28s linear infinite;
+    .facts-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 12px 28px; max-width: 1160px; margin-inline: auto;
       font-family: var(--font-display);
-      font-size: clamp(1rem, 2.4vw, 1.4rem);
-      letter-spacing: 1px; white-space: nowrap;
+      font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+      letter-spacing: 0.3px;
     }
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-    @keyframes marquee { to { transform: translateX(-50%); } }
+    .facts-row span { white-space: nowrap; }
 
     /* ============ Sections ============ */
-    section { padding: 96px 0; position: relative; }
+    section { padding: 96px 24px; position: relative; }
     .section-kicker {
       font-weight: 700; text-transform: uppercase; letter-spacing: 3px;
       font-size: 0.85rem; color: var(--pink-deep); margin-bottom: 10px;
@@ -489,10 +485,6 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       transform-style: preserve-3d; will-change: transform;
       position: relative; overflow: hidden;
-    }
-    .flavour-card::before {
-      content: ''; position: absolute; inset: 0 0 auto 0; height: 10px;
-      background: var(--swatch, var(--pink));
     }
     .flavour-art {
       width: 104px; height: auto; display: block;
@@ -595,61 +587,12 @@
     .menu-item .dots { flex: 1; border-bottom: 2px dotted rgba(58,35,24,0.25); transform: translateY(-4px); }
     .menu-item .price { font-weight: 700; color: var(--pink-deep); white-space: nowrap; }
     .menu-item .fav {
-      font-size: 0.65rem; background: var(--caramel); color: var(--choc);
-      border-radius: 999px; padding: 2px 8px; font-weight: 700;
+      font-size: 0.72rem; background: var(--caramel); color: var(--choc);
+      border-radius: 999px; padding: 3px 9px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 1px; margin-left: 6px;
       vertical-align: middle;
     }
     .menu-fineprint { margin-top: 26px; text-align: center; color: var(--choc-soft); font-size: 0.9rem; }
-
-    /* ============ 3D builder ============ */
-    .builder-section {
-      background:
-        radial-gradient(900px 550px at -10% 10%, var(--caramel-soft) 0%, transparent 55%),
-        radial-gradient(800px 500px at 110% 90%, var(--pink-soft) 0%, transparent 55%),
-        var(--cream);
-    }
-    .builder-card {
-      margin-top: 48px;
-      display: grid; grid-template-columns: 1.15fr 0.85fr;
-      background: #fff; border: 3px solid var(--choc); border-radius: var(--radius);
-      box-shadow: var(--shadow-pop); overflow: hidden;
-    }
-    .builder-canvas {
-      min-height: 520px; position: relative; cursor: grab;
-      background:
-        radial-gradient(600px 380px at 30% 20%, var(--mint-soft) 0%, transparent 60%),
-        radial-gradient(500px 350px at 80% 80%, var(--pink-soft) 0%, transparent 60%),
-        linear-gradient(180deg, #FFF9F0 0%, #FFEFE0 100%);
-    }
-    .builder-canvas:active { cursor: grabbing; }
-    .builder-canvas canvas { position: absolute; inset: 0; }
-    .builder-ui {
-      padding: 34px 30px; border-left: 3px solid var(--choc);
-      display: flex; flex-direction: column; gap: 22px; justify-content: center;
-    }
-    .builder-status { font-weight: 700; font-size: 1.08rem; }
-    .builder-status #scoopCount { color: var(--pink-deep); font-family: var(--font-display); font-size: 1.3em; }
-    .builder-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .builder-chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--font-body); font-weight: 600; font-size: 0.92rem;
-      background: var(--cream); border: 2.5px solid var(--choc); border-radius: 999px;
-      padding: 9px 16px; cursor: pointer;
-      box-shadow: 0 3px 0 var(--choc);
-      transition: transform 0.2s var(--ease-bounce), box-shadow 0.2s, background 0.2s;
-    }
-    .builder-chip:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--choc); background: #fff; }
-    .builder-chip:active { transform: translateY(1px); box-shadow: 0 2px 0 var(--choc); }
-    .chip-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--choc); }
-    .builder-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .builder-actions .btn { padding: 12px 22px; font-size: 0.95rem; }
-
-    @media (max-width: 960px) {
-      .builder-card { grid-template-columns: 1fr; }
-      .builder-canvas { min-height: 400px; }
-      .builder-ui { border-left: none; border-top: 3px solid var(--choc); }
-    }
 
     /* ============ Story ============ */
     .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -744,7 +687,7 @@
 
     /* ============ CTA banner ============ */
     .cta-banner {
-      background: linear-gradient(120deg, var(--pink) 0%, var(--berry) 100%);
+      background: linear-gradient(120deg, var(--pink-deep) 0%, var(--berry) 100%);
       color: #fff; text-align: center;
       border-radius: 32px; padding: clamp(48px, 7vw, 80px) 32px;
       position: relative; overflow: hidden;
@@ -771,7 +714,7 @@
     .site-footer p, .site-footer a { color: rgba(255, 247, 238, 0.85); }
     .site-footer a { text-decoration: none; }
     .site-footer a:hover { color: var(--caramel); }
-    .site-footer h4 {
+    .site-footer h3 {
       font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
       color: var(--caramel); margin-bottom: 16px;
     }
@@ -828,7 +771,7 @@
     }
     @media (max-width: 560px) {
       .flavours-grid { grid-template-columns: 1fr; max-width: 340px; margin-inline: auto; }
-      section { padding: 72px 0; }
+      section { padding: 72px 20px; }
     }
 
     /* ============ Reduced motion ============ */
@@ -849,14 +792,13 @@
   <!-- ============ Header ============ -->
   <header class="site-header" id="header">
     <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="The Ice Hut — home">
+      <a class="brand" href="#top" aria-label="The Ice Hut, home">
         <span class="cone-mark" aria-hidden="true">🍦</span> The Ice Hut
       </a>
       <nav aria-label="Main navigation" style="display:flex;align-items:center;gap:14px;">
         <ul class="nav-links" id="navLinks">
           <li><a href="#flavours">Flavours</a></li>
           <li><a href="#menu">Menu</a></li>
-          <li><a href="#builder">Cone Lab</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#story">Our Story</a></li>
           <li><a href="#visit">Visit</a></li>
@@ -898,8 +840,8 @@
               <path id="circlePath" d="M 100,100 m -74,0 a 74,74 0 1,1 148,0 a 74,74 0 1,1 -148,0" />
             </defs>
             <circle cx="100" cy="100" r="98" fill="#FF5D8F" stroke="#3A2318" stroke-width="4" />
-            <circle cx="100" cy="100" r="52" fill="#FFF7EE" stroke="#3A2318" stroke-width="3" />
-            <text fill="#FFF7EE" font-size="14.5" font-weight="bold" letter-spacing="2" font-family="Fredoka, sans-serif">
+            <circle cx="100" cy="100" r="52" fill="#EFFAF5" stroke="#3A2318" stroke-width="3" />
+            <text fill="#3A2318" font-size="14.5" font-weight="bold" letter-spacing="2" font-family="Fredoka, sans-serif">
               <textPath href="#circlePath">FAMILY OWNED • SINCE 1995 • MORINVILLE •</textPath>
             </text>
             <text x="100" y="112" text-anchor="middle" font-size="38">🍦</text>
@@ -1015,10 +957,9 @@
       </div>
     </section>
 
-    <!-- ============ Marquee ============ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>🍦 75+ FLAVOURS</span><span>⭐ FAMILY-OWNED SINCE 1995</span><span>🐶 PUPPY CONES</span><span>🌾 GLUTEN-FREE OPTIONS</span><span>🥛 FOOTHILLS CREAMERY</span><span>📍 MORINVILLE, ALBERTA</span>
+    <!-- ============ Facts strip ============ -->
+    <div class="facts-strip" aria-hidden="true">
+      <div class="facts-row">
         <span>🍦 75+ FLAVOURS</span><span>⭐ FAMILY-OWNED SINCE 1995</span><span>🐶 PUPPY CONES</span><span>🌾 GLUTEN-FREE OPTIONS</span><span>🥛 FOOTHILLS CREAMERY</span><span>📍 MORINVILLE, ALBERTA</span>
       </div>
     </div>
@@ -1054,18 +995,18 @@
           <p class="section-kicker">The good stuff</p>
           <h2 class="section-title" id="flavours-title">Flavours worth the drive 🚗</h2>
           <p class="section-sub">
-            We scoop premium Foothills Creamery ice cream — churned right here in Alberta.
+            We scoop premium Foothills Creamery ice cream, churned right here in Alberta.
             Here are a few crowd favourites, with 65+ more waiting at the window.
           </p>
         </div>
 
         <div class="fotw-banner reveal" role="note">
           <span class="fotw-star" aria-hidden="true">🌟</span>
-          <span>Flavour of the week: <strong id="fotw">Salted Caramel</strong> — ask for a taste at the window!</span>
+          <span>Flavour of the week: <strong id="fotw">Salted Caramel</strong>. Ask for a taste at the window!</span>
         </div>
 
         <div class="flavours-grid reveal-stagger">
-          <article class="flavour-card" style="--swatch:#8B5E3C;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-pb-chocolate.jpg" alt="Scoop of chocolate peanut butter swirl ice cream in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg1" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#A97A50"/><stop offset="0.55" stop-color="#8B5E3C"/><stop offset="1" stop-color="#5E3A21"/></radialGradient></defs>
@@ -1079,7 +1020,7 @@
             <h3>Chocolate Peanut Butter</h3>
             <p>Rich chocolate ice cream with a thick peanut butter marble. The local legend.</p>
           </article>
-          <article class="flavour-card" style="--swatch:#FF8FAB;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-cherry-cheesecake.jpg" alt="Scoop of cherry cheesecake ice cream with graham crumble in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg2" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFF4DE"/><stop offset="0.55" stop-color="#F5E3C0"/><stop offset="1" stop-color="#D9B98C"/></radialGradient></defs>
@@ -1094,7 +1035,7 @@
             <h3>New York Cherry Cheesecake</h3>
             <p>Cheesecake ice cream with cherry swirls and cinnamon graham chunks.</p>
           </article>
-          <article class="flavour-card" style="--swatch:#E8B14E;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-salted-caramel.jpg" alt="Scoop of salted caramel ice cream with caramel drizzle in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg3" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFCF8A"/><stop offset="0.55" stop-color="#E8A94E"/><stop offset="1" stop-color="#B87A2A"/></radialGradient></defs>
@@ -1108,7 +1049,7 @@
             <h3>Sea Salt Caramel Fudge</h3>
             <p>Vanilla loaded with fudge chunks and a salty caramel swirl.</p>
           </article>
-          <article class="flavour-card" style="--swatch:#FF9E3D;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-tiger-tail.jpg" alt="Scoop of orange and black licorice tiger tail ice cream in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg4" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFC078"/><stop offset="0.55" stop-color="#FF9E3D"/><stop offset="1" stop-color="#E67614"/></radialGradient></defs>
@@ -1120,9 +1061,9 @@
               <ellipse cx="46" cy="33" rx="8" ry="5" fill="#fff" opacity="0.5" transform="rotate(-24 46 33)"/>
             </svg>
             <h3>Tiger</h3>
-            <p>Orange ice cream with bold black licorice stripes — the roaring classic.</p>
+            <p>Orange ice cream with bold black licorice stripes. The roaring classic.</p>
           </article>
-          <article class="flavour-card" style="--swatch:#8B5A2B;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-moose-tracks.jpg" alt="Scoop of moose tracks ice cream with fudge and peanut butter cups" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg5" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFFBEE"/><stop offset="0.55" stop-color="#FFF3DC"/><stop offset="1" stop-color="#E8D2A8"/></radialGradient></defs>
@@ -1137,7 +1078,7 @@
             <h3>All Canadian Moose</h3>
             <p>Vanilla with chocolate marble and peanut butter cups. Moose-alicious.</p>
           </article>
-          <article class="flavour-card" style="--swatch:#7FD8C4;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-mint-chip.jpg" alt="Scoop of mint chocolate chip ice cream in a waffle cone" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg6" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#B8F2E3"/><stop offset="0.55" stop-color="#7FD8C4"/><stop offset="1" stop-color="#46B49B"/></radialGradient></defs>
@@ -1150,7 +1091,7 @@
             <h3>Mint Chocolate Chip</h3>
             <p>Bright green mint packed with chocolate chips.</p>
           </article>
-          <article class="flavour-card" style="--swatch:#9BD1FF;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-bubblegum.jpg" alt="Scoop of bright blue bubblegum ice cream with gumballs" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg7" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#C4E3FB"/><stop offset="0.55" stop-color="#8FC7F5"/><stop offset="1" stop-color="#5B9FD8"/></radialGradient></defs>
@@ -1161,9 +1102,9 @@
               <ellipse cx="46" cy="33" rx="8" ry="5" fill="#fff" opacity="0.6" transform="rotate(-24 46 33)"/>
             </svg>
             <h3>Bubble Gum</h3>
-            <p>Blue bubble gum ice cream with real gumball pieces — every scoop lasts longer.</p>
+            <p>Blue bubble gum ice cream with real gumball pieces, so every scoop lasts longer.</p>
           </article>
-          <article class="flavour-card" style="--swatch:#C9A0FF;">
+          <article class="flavour-card">
             <figure class="flavour-photo"><img loading="lazy" src="images/flavour-cotton-candy.jpg" alt="Scoop of pink and blue swirled cotton candy ice cream" width="800" height="800" onerror="this.parentElement.remove()" /></figure>
             <svg class="flavour-art" viewBox="0 0 120 136" aria-hidden="true">
               <defs><radialGradient id="fg8" cx="0.35" cy="0.28" r="1"><stop offset="0" stop-color="#FFD3EA"/><stop offset="0.55" stop-color="#FFB3D9"/><stop offset="1" stop-color="#F286BE"/></radialGradient></defs>
@@ -1178,7 +1119,7 @@
           </article>
         </div>
 
-        <p class="flavour-note reveal">…plus <span class="count">65+</span> more on the board — from Saskatoon Pie to locally-grown Haskap Prairie Berry. Sorbets, sherbets, lactose-free and no-sugar-added, too. 🎡</p>
+        <p class="flavour-note reveal">…plus <span class="count">65+</span> more on the board, from Saskatoon Pie to locally-grown Haskap Prairie Berry. Sorbets, sherbets, lactose-free and no-sugar-added, too. 🎡</p>
       </div>
     </section>
 
@@ -1228,28 +1169,6 @@
       </div>
     </section>
 
-    <!-- ============ 3D cone builder ============ -->
-    <section id="builder" class="builder-section" hidden aria-labelledby="builder-title">
-      <div class="wrap">
-        <div class="reveal">
-          <p class="section-kicker">Play with it</p>
-          <h2 class="section-title" id="builder-title">Build your dream cone 🎨</h2>
-          <p class="section-sub">Tap flavours to stack your scoops in 3D — drag to spin it around. (We'll build the real one at the window.)</p>
-        </div>
-        <div class="builder-card reveal">
-          <div class="builder-canvas" role="img" aria-label="Interactive 3D ice cream cone you can stack with flavours"></div>
-          <div class="builder-ui">
-            <p class="builder-status"><span id="scoopCount">0</span> scoop(s) — <span id="builderQuip">Pick a flavour to start stacking!</span></p>
-            <div class="builder-chips" role="group" aria-label="Flavour choices"></div>
-            <div class="builder-actions">
-              <button class="btn btn-primary" type="button" id="builderSurprise">🎲 Surprise me</button>
-              <button class="btn btn-ghost" type="button" id="builderReset">↺ Start over</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ Story ============ -->
     <section id="story" aria-labelledby="story-title">
       <div class="wrap">
@@ -1266,7 +1185,7 @@
                 end the same way: with an enormous cone.
               </p>
               <p>
-                We keep it simple — premium Alberta-made Foothills Creamery ice cream,
+                We keep it simple: premium Alberta-made Foothills Creamery ice cream,
                 scooped generously, served with a smile. We source locally where we can
                 (hello, Haskap berries) and love supporting neighbourhood events.
               </p>
@@ -1318,7 +1237,7 @@
           </blockquote>
           <blockquote class="review-card">
             <div class="review-stars" aria-label="5 stars">★★★★★</div>
-            <p>"The amount of unique flavours is remarkable — and they're great with gluten-free needs."</p>
+            <p>"The amount of unique flavours is remarkable, and they're great with gluten-free needs."</p>
             <footer>— Google review</footer>
           </blockquote>
           <blockquote class="review-card">
@@ -1339,7 +1258,7 @@
         <div class="reveal">
           <p class="section-kicker">Come say hi</p>
           <h2 class="section-title" id="visit-title">Find the Hut 📍</h2>
-          <p class="section-sub">Right in the heart of Morinville — 20 minutes north of Edmonton, and worth every one of them.</p>
+          <p class="section-sub">Right in the heart of Morinville (20 minutes north of Edmonton), and worth every one of them.</p>
         </div>
 
         <div class="visit-grid reveal-stagger">
@@ -1386,7 +1305,7 @@
         <div class="faq-list reveal-stagger">
           <details>
             <summary>Where is The Ice Hut located?</summary>
-            <p>We're at 9911 100 Street, Morinville, Alberta, T8R 1R4 — right in the heart of town, about 20 minutes north of Edmonton.</p>
+            <p>We're at 9911 100 Street, Morinville, Alberta, T8R 1R4, right in the heart of town (about 20 minutes north of Edmonton).</p>
           </details>
           <details>
             <summary>What are your hours?</summary>
@@ -1394,7 +1313,7 @@
           </details>
           <details>
             <summary>What kind of ice cream do you serve?</summary>
-            <p>Premium Foothills Creamery ice cream — an Alberta favourite — with 75+ rotating flavours, from timeless classics to fan favourites like Sea Salt Caramel Fudge and New York Cherry Cheesecake. Sorbets, sherbets, lactose-free and no-sugar-added options too.</p>
+            <p>Premium Foothills Creamery ice cream, an Alberta favourite, with 75+ rotating flavours: from timeless classics to fan favourites like Sea Salt Caramel Fudge and New York Cherry Cheesecake. Sorbets, sherbets, lactose-free and no-sugar-added options too.</p>
           </details>
           <details>
             <summary>Do you have gluten-free options?</summary>
@@ -1402,11 +1321,11 @@
           </details>
           <details>
             <summary>Can I bring my dog?</summary>
-            <p>Absolutely — four-legged customers are some of our favourites. Treat them to a Puppy Cone for $2.25 and watch the tail go.</p>
+            <p>Absolutely, four-legged customers are some of our favourites. Treat them to a Puppy Cone for $2.25 and watch the tail go.</p>
           </details>
           <details>
             <summary>How long has The Ice Hut been around?</summary>
-            <p>We've been family-owned and scooping in Morinville since 1995 — over three decades of summers and counting.</p>
+            <p>We've been family-owned and scooping in Morinville since 1995, over three decades of summers and counting.</p>
           </details>
         </div>
       </div>
@@ -1419,7 +1338,7 @@
           <img class="cta-bg" loading="lazy" src="images/cta-banner.jpg" alt="" aria-hidden="true" onerror="this.remove()" />
           <div class="cta-overlay" aria-hidden="true"></div>
           <h2>Your cone is waiting. 🍦</h2>
-          <p>Swing by the Hut tonight — the hardest part is picking a flavour.</p>
+          <p>Swing by the Hut tonight. The hardest part is picking a flavour.</p>
           <a class="btn" href="https://maps.google.com/?q=The+Ice+Hut,+9911+100+Street,+Morinville,+AB" target="_blank" rel="noopener">Take me to the ice cream →</a>
         </div>
       </div>
@@ -1431,12 +1350,12 @@
     <div class="wrap">
       <div class="footer-grid">
         <div>
-          <img src="images/logo.png" alt="The Ice Hut — Cold Treats &amp; Other Eats" width="335" height="225" style="width:180px; height:auto; margin-bottom:14px;" onerror="this.remove()" />
+          <img src="images/logo.png" alt="The Ice Hut: Cold Treats &amp; Other Eats" width="335" height="225" style="width:180px; height:auto; margin-bottom:14px;" onerror="this.remove()" />
           <p class="footer-brand">🍦 The Ice Hut</p>
-          <p>Cold treats &amp; other eats — a family-owned ice cream shop in the heart of Morinville, Alberta, scooping premium Foothills Creamery ice cream since 1995.</p>
+          <p>Cold treats &amp; other eats: a family-owned ice cream shop in the heart of Morinville, Alberta, scooping premium Foothills Creamery ice cream since 1995.</p>
         </div>
         <div>
-          <h4>Visit</h4>
+          <h3>Visit</h3>
           <ul>
             <li>9911 100 Street</li>
             <li>Morinville, AB T8R 1R4</li>
@@ -1445,7 +1364,7 @@
           </ul>
         </div>
         <div>
-          <h4>Explore</h4>
+          <h3>Explore</h3>
           <ul>
             <li><a href="#flavours">Flavours</a></li>
             <li><a href="#menu">Menu</a></li>
@@ -1710,22 +1629,6 @@
         requestAnimationFrame(draw);
       }
     })();
-  </script>
-
-  <!-- 3D cone builder: progressive enhancement, section stays hidden if WebGL/modules are unavailable -->
-  <script type="module">
-    const section = document.getElementById('builder');
-    try {
-      const probe = document.createElement('canvas');
-      const gl = probe.getContext('webgl2') || probe.getContext('webgl');
-      if (gl) {
-        const { initConeBuilder } = await import('./js/cone3d.js');
-        section.hidden = false;
-        initConeBuilder(section);
-      }
-    } catch (e) {
-      section.hidden = true;
-    }
   </script>
 </body>
 </html>

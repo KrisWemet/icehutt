@@ -20,16 +20,12 @@ A modern, animation-rich redesign concept for [The Ice Hut](https://morinvilleic
 
 ## Highlights
 
-**3D Cone Lab** 🧪
-- A real-time WebGL "Build your dream cone" section (`js/cone3d.js`, powered by a vendored Three.js — MIT licence, no CDN): tap flavours to stack squishy, hand-scooped 3D scoops with a drop-and-bounce animation, drag to spin, floating 3D sprinkles, cherry on top, and a camera that pulls back as the tower grows (max 5 scoops — "a Morinville single")
-- Progressive enhancement: the section only appears when WebGL is available, so nothing breaks on old devices
-- The hero photo also tilts in 3D as the mouse moves
-
 **Motion & delight**
 - Animated sprinkle particle field in the hero (canvas, pauses off-screen)
-- Floating triple-scoop SVG cone with dripping animation and a spinning "Since 1995" badge
+- Hero photo in a slow-morphing blob frame with a Ken Burns zoom and cursor-driven 3D tilt
 - Scroll-triggered staggered reveals, animated stat counters, 3D-tilt flavour cards
-- Scrolling marquee, marshmallow-soft hover states everywhere
+- A calm, static "facts strip" (75+ flavours, family-owned since 1995, etc.) — no infinite auto-scrolling ticker demanding attention it hasn't earned
+- Marshmallow-soft hover states everywhere
 - Fully respects `prefers-reduced-motion`
 
 **Smart touches**
@@ -50,3 +46,18 @@ Hours (seasonal May–September schedule), address, phone, menu items and prices
 - `www.morinvilleicehut.ca` has an invalid TLS certificate (browsers warn on the `www` address; the bare domain is fine)
 - The homepage says "since 1995" but the About page says "since 1997"
 - The Menu page footer shows phone (780) 819-9726 while every other page shows (780) 974-9944 (this redesign uses 974-9944)
+
+## 🎨 Design quality pass
+
+Run through [Impeccable](https://github.com/pbakaus/impeccable), a deterministic detector for common "AI-generated UI" tells (`npx impeccable detect index.html`). Fixed everything it flagged:
+
+- **Contrast**: darkened the accent pink (`--pink-deep`) and switched button/badge text so every text/background pairing clears WCAG AA (4.5:1), including the CTA banner gradient and the spinning "since 1995" badge
+- **No gradient-clipped text**: the hero's "Bigger smiles." is a solid color with a hand-drawn wavy underline instead of a scrolling rainbow gradient
+- **No infinite marquee**: replaced the auto-scrolling fact ticker with a calm, static, wrapping row
+- **Removed the card side-stripe** (the "most recognizable AI-UI tell," per the tool) from flavour cards — the photo already carries the flavour's identity
+- **Deliberate palette**: swapped the reflexive warm-beige page background for a pale mint tone that's clearly a considered choice, not a default
+- **Fixed**: a layout-thrashing padding transition on scroll, undersized 10px badge text, sections with no horizontal inset on small viewports, a skipped heading level in the footer, and body-level overflow clipping that could have hidden fixed-position UI
+- **Cut em-dash overuse** in the copy from 22 instances to 4 (kept only in review attributions)
+- **Kept intentionally**: the pulsing "Open now" status dot — the tool's own rule carves out an exception for indicators tied to genuinely live data, and ours recomputes from the real clock every 60 seconds
+
+Also removed the WebGL "3D Cone Lab" per request — along with the vendored Three.js bundle (~740KB) it shipped with.
