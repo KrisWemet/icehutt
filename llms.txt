@@ -67,6 +67,18 @@ A: Yes, a grassy area with picnic benches on-site.
 Q: How long has The Ice Hut been open?
 A: Since 1995, over three decades, family-owned and operated throughout.
 
+## All 75+ flavours
+
+All Canadian Moose, Banana Chocolate Fudge, Banana Split, Belgian Hazelnut, Birthday Cake, Black Licorice, Blast Off, Blueberry Cheesecake, Bubble Gum, Burgundy Cherry, Butter Pecan, Campfire Smores, Caramel Candy Apple, Caramel Coffee Macchiato (No Sugar Added), Caramel Crunch (No Sugar Added), Cherry Custard, Chocolate, Chocolate Covered Strawberry, Chocolate Lactose-Free, Chocolate Peanut Butter, Cinnamon Bun, Coconut, Coffee Bean, Cookie Beast, Cookie Dough, Cookies & Cream, Cotton Candy, Cream Soda Float, Creme Brulee, Dunkamoo, Funky Monkey, Grape Float, Haskap Prairie Berry, Ice Cream Of Champions, Kulfi, Lemon Sorbet (Dairy-Free), Mango, Maple Nut, Mint Chocolate Chip, Mocha Mountain, Moon Mist, Mud Pie, Nanaimo Brownie, New York Cherry Cheesecake, Oh Canada, Orange Float, Passion Fruit Sorbet (Dairy-Free), Peanut Butter Crunch, Pineapple Sherbert, Pistachio With Almonds, Rainbow Sherbert, Raspberry Cheesecake, Red Velvet, Rocket Pop Sorbet (Dairy-Free), Rocky Road, Rootbeer Float, Rum Raisin, Salted Chocolate Caramel, Salted Cookies & Cream, Sangria Sorbet (Dairy-Free), Saskatoon Pie, Sea Salt Caramel Fudge, Shaft, Shark Attack, Spiced Hot Chocolate Churro, Spumoni Twist, Strawberry, Strawberry Sensation (Lactose-Free), Tiger, Toasted Coconut (Lactose-Free), Triple Fudge Brownie, Turtle Mountain, Vanilla, Wet Paint, Whisky Caramel.
+
+Dietary tags above reflect only what's explicitly stated on the menu board. Allergen details vary by flavour — ask staff at the window for current info.
+
 ## Pages
 
-- [Home](https://morinvilleicehut.ca/): flavours, full menu with prices, hours, location, reviews, and FAQ
+- [Home](https://morinvilleicehut.ca/): overview, hours, and links to everything below
+- [Flavours](https://morinvilleicehut.ca/flavours.html): all 75+ flavours with descriptions and dietary tags
+- [Menu & Prices](https://morinvilleicehut.ca/menu.html): sizes, other eats, and drinks with prices
+- [Our Story](https://morinvilleicehut.ca/story.html): history since 1995
+- [Reviews](https://morinvilleicehut.ca/reviews.html): customer reviews and a photo from Facebook
+- [Visit](https://morinvilleicehut.ca/visit.html): hours, address, map, and contact
+- [FAQ](https://morinvilleicehut.ca/faq.html): common questions answered

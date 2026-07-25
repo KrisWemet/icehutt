@@ -4,7 +4,21 @@ A modern, animation-rich redesign concept for [The Ice Hut](https://morinvilleic
 
 ## What's inside
 
-- **`index.html`** — the entire site, fully self-contained (inline CSS + JS, zero build step, zero dependencies). Open it in any browser or drop it on any static host.
+**Seven pages**, each targeting its own search intent, sharing one stylesheet and script (zero build step, zero framework — plain static files, drop on any host):
+
+| Page | Targets |
+|---|---|
+| `index.html` | Home — "Ice Hut", "Ice Hut Morinville", brand searches |
+| `flavours.html` | "ice cream flavours Morinville" — all 75+ real flavours, A–Z |
+| `menu.html` | "Ice Hut menu", "ice cream prices Morinville" |
+| `story.html` | "Ice Hut history", brand/about queries |
+| `reviews.html` | "Ice Hut reviews", "best ice cream Morinville" |
+| `visit.html` | "Ice Hut hours", "ice cream near Morinville", directions |
+| `faq.html` | long-tail questions ("does the ice hut have gluten free") |
+
+Previously this was a single page; splitting it out means each topic can rank on its own instead of all competing for the same slot, and each has its own title, meta description, and structured data.
+
+- **`styles.css`** / **`script.js`** — shared across every page (cached once, loaded everywhere).
 - **`images/`** — AI-generated food photography (see *Automations* below), driven by `images/prompts.json`.
 - **`robots.txt`** / **`sitemap.xml`** — search engine crawling support.
 - **`llms.txt`** — an [llms.txt](https://llmstxt.org/) summary so AI assistants (ChatGPT, Claude, Perplexity, Google AI Overviews) can answer questions about the shop accurately.
@@ -69,3 +83,21 @@ Also removed the WebGL "3D Cone Lab" per request — along with the vendored Thr
 ## 📸 Real photo sourcing
 
 Pulled candidate photos from the shop's public Facebook page, Google Maps, and image search (`.github/workflows/fetch-social-photos.yml`, runs on GitHub's servers since Facebook/Google are unreachable from this sandbox). Google Maps required sign-in and returned nothing; image search returned unrelated businesses named "Ice Hut" elsewhere. Exactly one genuine, on-brand, usable photo turned up: the shop's own Facebook profile picture (5 pastel scoops in cones), now on the site as `images/real-fb-cones.jpg` with a caption crediting the source. Everything else photographic on the site remains AI-generated (see the image pipeline above) since no other real photos of the actual food, storefront, or staff were publicly available to pull from.
+
+## 🔍 Multi-page SEO architecture
+
+Split the single-page site into seven, each independently optimized:
+
+- **Unique title, meta description, and canonical URL per page**, each targeting a distinct real search query (see table above) instead of every page fighting for the same one
+- **JSON-LD on every page**: the core `IceCreamShop` business entity repeats everywhere (standard practice — every page is a potential landing page and should carry NAP + hours for local-pack eligibility), plus a page-specific type: `Menu` on Flavours/Menu, `FAQPage` on FAQ, `AboutPage` on Story, `ContactPage` on Visit, and a `BreadcrumbList` on every subpage matching a visible breadcrumb trail
+- **All 75+ real flavours** (name + description, scraped from the original site) as their own glossary section on `flavours.html`, also embedded as `MenuItem`s in the schema — genuine topical depth, not just the 8 photo cards
+- **Dietary tags only where explicitly stated** on the source menu (No Sugar Added, Dairy-Free for sorbets, Lactose-Free) — never guessed per-flavour allergen claims, which would be a real food-safety risk to fabricate; a clear disclaimer points people to ask staff
+- **Internal linking**: every page's footer links to all six others, plus contextual "See full menu →" / "See all flavours →" CTAs between related pages
+- `sitemap.xml` and `llms.txt` updated with all seven URLs
+
+### On ranking #1
+
+Technical SEO is table stakes, not a guarantee. Realistic targets: **"Ice Hut"**, **"Ice Hut Morinville"**, and **"ice cream Morinville"** are winnable for a well-optimized local business site. Ranking #1 for a bare generic term like **"ice cream"** is not realistic for a small local shop (competing with national chains, retailers, Wikipedia) and no amount of on-page work changes that. Two things outside this codebase matter as much as anything here:
+
+1. **This needs to go live on the real `morinvilleicehut.ca` domain.** A `vercel.app` preview URL won't accumulate the domain history, backlinks, or trust signals the ranking depends on.
+2. **Google Business Profile** (reviews, photos, posts, Q&A) drives local-pack rankings as much as the website does — worth the owner's attention alongside this redesign.
