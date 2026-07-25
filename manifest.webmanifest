@@ -1,0 +1,14 @@
+{
+  "name": "The Ice Hut",
+  "short_name": "Ice Hut",
+  "description": "Cold Treats & Other Eats — family-owned ice cream shop in Morinville, Alberta since 1995.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EFFAF5",
+  "theme_color": "#FF5D8F",
+  "lang": "en-CA",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

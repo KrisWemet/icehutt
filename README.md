@@ -9,6 +9,8 @@ A modern, animation-rich redesign concept for [The Ice Hut](https://morinvilleic
 - **`robots.txt`** / **`sitemap.xml`** — search engine crawling support.
 - **`llms.txt`** — an [llms.txt](https://llmstxt.org/) summary so AI assistants (ChatGPT, Claude, Perplexity, Google AI Overviews) can answer questions about the shop accurately.
 - **`og-image.png`** — social sharing preview image (Facebook, iMessage, etc.).
+- **`manifest.webmanifest`** + **`images/icon-*.png`** — installable-app icons generated from the shop's real logo (`images/logo.png`), dark chocolate background, neon-sign look.
+- **`images/real-fb-cones.jpg`** — a genuine photo from the shop's own Facebook page (see `social-photos/` for provenance).
 
 ## Automations 🤖
 
@@ -32,10 +34,12 @@ A modern, animation-rich redesign concept for [The Ice Hut](https://morinvilleic
 - Live **"Open now / Opens at…"** pill computed in America/Edmonton time, with today's row highlighted in the hours table
 - "Summers of scooping" counter updates itself every year automatically
 
-**SEO & AI-search (GEO) optimization**
-- `IceCreamShop` + `FAQPage` JSON-LD structured data (rich results, knowledge panels, AI answers)
-- Full Open Graph + Twitter Card metadata, canonical URL, geo meta tags
-- Semantic HTML, descriptive headings, an on-page FAQ that mirrors the schema
+**SEO & AEO (answer-engine optimization)**
+- A single linked JSON-LD `@graph`: `IceCreamShop`, a full `Menu` (every size/price/topping/drink as `MenuItem` + `Offer`, ready for Google's menu rich results), `FAQPage` (10 questions, every one mirrored in visible on-page text — schema.org guidelines require the match), `WebPage` with `SpeakableSpecification` for voice assistants, and `WebSite`
+- No fabricated `AggregateRating`: searched multiple sources for a real, citable star rating and found none, so none was added — fake review schema is a Google policy violation and actively misleading
+- Full Open Graph + Twitter Card metadata (with image alt text), canonical URL, geo meta tags, PWA manifest, real app icons
+- `llms.txt` expanded with the full menu and a Q&A block for AI assistants (ChatGPT, Perplexity, Google AI Overviews, Claude)
+- Embedded Google Maps iframe in the Visit section (real map, not just a link) for local-SEO trust signals
 - Accessible: skip link, focus states, aria labels, keyboard-friendly accordions
 
 ## ✅ Fact-checked against the original site
@@ -61,3 +65,7 @@ Run through [Impeccable](https://github.com/pbakaus/impeccable), a deterministic
 - **Kept intentionally**: the pulsing "Open now" status dot — the tool's own rule carves out an exception for indicators tied to genuinely live data, and ours recomputes from the real clock every 60 seconds
 
 Also removed the WebGL "3D Cone Lab" per request — along with the vendored Three.js bundle (~740KB) it shipped with.
+
+## 📸 Real photo sourcing
+
+Pulled candidate photos from the shop's public Facebook page, Google Maps, and image search (`.github/workflows/fetch-social-photos.yml`, runs on GitHub's servers since Facebook/Google are unreachable from this sandbox). Google Maps required sign-in and returned nothing; image search returned unrelated businesses named "Ice Hut" elsewhere. Exactly one genuine, on-brand, usable photo turned up: the shop's own Facebook profile picture (5 pastel scoops in cones), now on the site as `images/real-fb-cones.jpg` with a caption crediting the source. Everything else photographic on the site remains AI-generated (see the image pipeline above) since no other real photos of the actual food, storefront, or staff were publicly available to pull from.

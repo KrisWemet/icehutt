@@ -22,6 +22,7 @@
   <meta property="og:image" content="https://morinvilleicehut.ca/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="A towering triple-scoop ice cream cone from The Ice Hut" />
   <meta property="og:locale" content="en_CA" />
 
   <!-- Twitter -->
@@ -29,8 +30,13 @@
   <meta name="twitter:title" content="The Ice Hut: Morinville's Ice Cream Shop Since 1995" />
   <meta name="twitter:description" content="75+ flavours. Legendary scoops. Family-owned since 1995. Morinville, Alberta." />
   <meta name="twitter:image" content="https://morinvilleicehut.ca/og-image.png" />
+  <meta name="twitter:image:alt" content="A towering triple-scoop ice cream cone from The Ice Hut" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍦%3C/text%3E%3C/svg%3E" />
+  <!-- Icons & PWA manifest (generated from the shop's real logo) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/icon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/icon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icon-180.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
 
   <link rel="preload" as="image" href="images/hero.jpg" />
 
@@ -39,134 +45,234 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Structured data: IceCreamShop -->
+  <!-- Structured data: IceCreamShop + Menu + FAQPage + WebPage/Speakable, as one linked graph -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "IceCreamShop",
-    "name": "The Ice Hut",
-    "alternateName": "Morinville Ice Hut",
-    "description": "Family-owned ice cream shop in Morinville, Alberta, serving premium Foothills Creamery ice cream since 1995. Known for 75+ flavours, generous scoops, milkshakes, ice cream nachos and Puppy Cones for dogs. Cold treats & other eats, May through September.",
-    "url": "https://morinvilleicehut.ca/",
-    "telephone": "+1-(780) 974-9944",
-    "email": "dawn@morinvilleicehut.ca",
-    "foundingDate": "1995",
-    "priceRange": "$",
-    "servesCuisine": "Ice Cream",
-    "currenciesAccepted": "CAD",
-    "image": "https://morinvilleicehut.ca/og-image.png",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "9911 100 Street",
-      "addressLocality": "Morinville",
-      "addressRegion": "AB",
-      "postalCode": "T8R 1R4",
-      "addressCountry": "CA"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 53.7909,
-      "longitude": -113.6497
-    },
-    "openingHoursSpecification": [
+    "@graph": [
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "15:00",
-        "closes": "21:30",
-        "validFrom": "2026-05-01",
-        "validThrough": "2026-06-30"
+        "@type": "IceCreamShop",
+        "@id": "https://morinvilleicehut.ca/#business",
+        "name": "The Ice Hut",
+        "alternateName": "Morinville Ice Hut",
+        "slogan": "Cold Treats & Other Eats",
+        "description": "Family-owned ice cream shop in Morinville, Alberta, serving premium Foothills Creamery ice cream since 1995. Known for 75+ flavours, generous scoops, milkshakes, ice cream nachos and Puppy Cones for dogs. Cold treats & other eats, open seasonally May through September.",
+        "url": "https://morinvilleicehut.ca/",
+        "telephone": "+1-780-974-9944",
+        "email": "dawn@morinvilleicehut.ca",
+        "foundingDate": "1995",
+        "priceRange": "$",
+        "servesCuisine": "Ice Cream",
+        "currenciesAccepted": "CAD",
+        "paymentAccepted": "Cash, Credit Card, Debit Card",
+        "publicAccess": true,
+        "isAccessibleForFree": false,
+        "smokingAllowed": false,
+        "petsAllowed": true,
+        "image": [
+          "https://morinvilleicehut.ca/og-image.png",
+          "https://morinvilleicehut.ca/images/hero.jpg",
+          "https://morinvilleicehut.ca/images/real-fb-cones.jpg"
+        ],
+        "logo": "https://morinvilleicehut.ca/images/logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "9911 100 Street",
+          "addressLocality": "Morinville",
+          "addressRegion": "AB",
+          "postalCode": "T8R 1R4",
+          "addressCountry": "CA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 53.7909,
+          "longitude": -113.6497
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=The+Ice+Hut+9911+100+Street+Morinville+AB",
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 53.7909, "longitude": -113.6497 },
+          "geoRadius": "40000"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "15:00",
+            "closes": "21:30",
+            "validFrom": "2026-05-01",
+            "validThrough": "2026-06-30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "12:00",
+            "closes": "21:30",
+            "validFrom": "2026-05-01",
+            "validThrough": "2026-06-30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "12:00",
+            "closes": "21:30",
+            "validFrom": "2026-07-01",
+            "validThrough": "2026-08-31"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "15:00",
+            "closes": "21:00",
+            "validFrom": "2026-09-01",
+            "validThrough": "2026-09-30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "12:00",
+            "closes": "21:00",
+            "validFrom": "2026-09-01",
+            "validThrough": "2026-09-30"
+          }
+        ],
+        "sameAs": [
+          "https://www.facebook.com/morinvilleicehut/",
+          "https://www.instagram.com/morinvilleicehut/"
+        ],
+        "hasMenu": { "@id": "https://morinvilleicehut.ca/#menu" }
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday", "Sunday"],
-        "opens": "12:00",
-        "closes": "21:30",
-        "validFrom": "2026-05-01",
-        "validThrough": "2026-06-30"
+        "@type": "Menu",
+        "@id": "https://morinvilleicehut.ca/#menu",
+        "name": "The Ice Hut Menu",
+        "inLanguage": "en-CA",
+        "hasMenuSection": [
+          {
+            "@type": "MenuSection",
+            "name": "Sizes & Pricing",
+            "description": "Regular cone or paper bowl included in scoop pricing. Prices before GST.",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Puppy Cone", "description": "A small plain cone made just for dogs.", "offers": { "@type": "Offer", "price": "2.25", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Kids Single", "description": "One scoop, kid-sized.", "offers": { "@type": "Offer", "price": "4.50", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Kids Double", "description": "Two scoops, kid-sized.", "offers": { "@type": "Offer", "price": "5.50", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Single", "description": "One generous scoop, any flavour.", "offers": { "@type": "Offer", "price": "6.50", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Double", "description": "Two generous scoops.", "offers": { "@type": "Offer", "price": "7.50", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Giant", "description": "Three scoops, three flavours.", "offers": { "@type": "Offer", "price": "9.00", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Waffle or Gluten-Free Cone Upgrade", "description": "Upgrade any size to a waffle cone or a gluten-free cone.", "offers": { "@type": "Offer", "price": "1.50", "priceCurrency": "CAD" }, "suitableForDiet": "https://schema.org/GlutenFreeDiet" }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Other Eats",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Ice Cream Nachos", "description": "A shareable plate of ice cream loaded with toppings.", "offers": { "@type": "Offer", "price": "9.75", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Ice Cream Float", "offers": { "@type": "Offer", "price": "8.50", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Milkshake 24oz", "offers": { "@type": "Offer", "price": "9.00", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Milkshake 32oz", "offers": { "@type": "Offer", "price": "11.00", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Sprinkles", "offers": { "@type": "Offer", "price": "0.50", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Crumble Topping", "offers": { "@type": "Offer", "price": "1.00", "priceCurrency": "CAD" } }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Drinks",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Water", "offers": { "@type": "Offer", "price": "2.00", "priceCurrency": "CAD" } },
+              { "@type": "MenuItem", "name": "Bottled Pop", "description": "Berry Lemonade, Coke, Cream Soda, Orange Cream, Rootbeer, Strawberry Lime, Iced Tea, or Lemonade.", "offers": { "@type": "Offer", "price": "3.00", "priceCurrency": "CAD" } }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Featured Flavours",
+            "description": "A sample of 75+ rotating flavours; price follows the size ordered, not the flavour.",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Chocolate Peanut Butter", "description": "Rich chocolate ice cream with a thick peanut butter marble." },
+              { "@type": "MenuItem", "name": "New York Cherry Cheesecake", "description": "Cheesecake ice cream with cherry swirls and cinnamon graham chunks." },
+              { "@type": "MenuItem", "name": "Sea Salt Caramel Fudge", "description": "Vanilla loaded with fudge chunks and a salty caramel swirl." },
+              { "@type": "MenuItem", "name": "Tiger", "description": "Orange ice cream with bold black licorice stripes.", "suitableForDiet": "https://schema.org/GlutenFreeDiet" },
+              { "@type": "MenuItem", "name": "All Canadian Moose", "description": "Vanilla with chocolate marble and peanut butter cups." },
+              { "@type": "MenuItem", "name": "Mint Chocolate Chip", "description": "Bright green mint packed with chocolate chips." },
+              { "@type": "MenuItem", "name": "Bubble Gum", "description": "Blue bubble gum ice cream with real gumball pieces." },
+              { "@type": "MenuItem", "name": "Cotton Candy", "description": "Pink cotton candy swirled with blue marshmallow ribbon." },
+              { "@type": "MenuItem", "name": "Haskap Prairie Berry", "description": "Vanilla ice cream blended with locally grown Haskap berries." },
+              { "@type": "MenuItem", "name": "Saskatoon Pie", "description": "Old-fashioned Saskatoon berry ice cream with real berries and graham crunch." }
+            ]
+          }
+        ]
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "12:00",
-        "closes": "21:30",
-        "validFrom": "2026-07-01",
-        "validThrough": "2026-08-31"
+        "@type": "FAQPage",
+        "@id": "https://morinvilleicehut.ca/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Where is The Ice Hut located?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Ice Hut is at 9911 100 Street, Morinville, Alberta, T8R 1R4, right in the heart of town (about 20 minutes north of Edmonton)." }
+          },
+          {
+            "@type": "Question",
+            "name": "What are The Ice Hut's hours?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We scoop May through September. May–June: Monday–Friday 3:00pm–9:30pm, weekends 12:00pm–9:30pm. July–August: every day 12:00pm–9:30pm. September: Monday–Friday 3:00pm–9:00pm, weekends 12:00pm–9:00pm. Closed October–April." }
+          },
+          {
+            "@type": "Question",
+            "name": "What kind of ice cream does The Ice Hut serve?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We scoop premium Foothills Creamery ice cream, an Alberta favourite, with 75+ rotating flavours: from classics like Chocolate and Tiger to Sea Salt Caramel Fudge and New York Cherry Cheesecake." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does The Ice Hut have gluten-free options?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes! The flavour board flags no-nuts, no-gluten, no-eggs, no-lactose and no-dairy options, there are sorbets and no-sugar-added flavours, and gluten-free cones are available for $1.50." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I bring my dog to The Ice Hut?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Absolutely, four-legged friends are welcome, and we serve a Puppy Cone made just for them for $2.25." }
+          },
+          {
+            "@type": "Question",
+            "name": "How long has The Ice Hut been open?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Ice Hut has been family-owned and scooping in Morinville since 1995, over three decades of summers." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much is a milkshake at The Ice Hut?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Milkshakes are $9.00 for 24oz or $11.00 for 32oz, in any flavour." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does The Ice Hut have outdoor seating?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, there's a grassy area with picnic benches right at the Hut, perfect for enjoying a cone outside on a summer evening." }
+          },
+          {
+            "@type": "Question",
+            "name": "What payment methods does The Ice Hut accept?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Ice Hut accepts cash, credit card, and debit card." }
+          }
+        ]
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "15:00",
-        "closes": "21:00",
-        "validFrom": "2026-09-01",
-        "validThrough": "2026-09-30"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday", "Sunday"],
-        "opens": "12:00",
-        "closes": "21:00",
-        "validFrom": "2026-09-01",
-        "validThrough": "2026-09-30"
-      }
-    ],
-    "sameAs": ["https://www.facebook.com/morinvilleicehut/"]
-  }
-  </script>
-
-  <!-- Structured data: FAQ -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Where is The Ice Hut located?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The Ice Hut is at 9911 100 Street, Morinville, Alberta, T8R 1R4, right in the heart of town (about 20 minutes north of Edmonton)."
+        "@type": "WebPage",
+        "@id": "https://morinvilleicehut.ca/#webpage",
+        "url": "https://morinvilleicehut.ca/",
+        "name": "The Ice Hut | Ice Cream Shop in Morinville, Alberta, Family-Owned Since 1995",
+        "isPartOf": { "@id": "https://morinvilleicehut.ca/#website" },
+        "about": { "@id": "https://morinvilleicehut.ca/#business" },
+        "inLanguage": "en-CA",
+        "dateModified": "2026-07-25",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".hero-sub", "#faq", "#visit"]
         }
       },
       {
-        "@type": "Question",
-        "name": "What are The Ice Hut's hours?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We scoop May through September. May–June: Monday–Friday 3:00pm–9:30pm, weekends 12:00pm–9:30pm. July–August: every day 12:00pm–9:30pm. September: Monday–Friday 3:00pm–9:00pm, weekends 12:00pm–9:00pm. Closed October–April."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What kind of ice cream does The Ice Hut serve?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We scoop premium Foothills Creamery ice cream, an Alberta favourite, with 75+ rotating flavours: from classics like Chocolate and Tiger to Sea Salt Caramel Fudge and New York Cherry Cheesecake."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does The Ice Hut have gluten-free options?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes! The flavour board flags no-nuts, no-gluten, no-eggs, no-lactose and no-dairy options, there are sorbets and no-sugar-added flavours, and gluten-free cones are available for $1.50."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I bring my dog to The Ice Hut?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Absolutely, four-legged friends are welcome, and we serve a Puppy Cone made just for them for $2.25."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long has The Ice Hut been open?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The Ice Hut has been family-owned and scooping in Morinville since 1995, over three decades of summers."
-        }
+        "@type": "WebSite",
+        "@id": "https://morinvilleicehut.ca/#website",
+        "url": "https://morinvilleicehut.ca/",
+        "name": "The Ice Hut",
+        "publisher": { "@id": "https://morinvilleicehut.ca/#business" },
+        "inLanguage": "en-CA"
       }
     ]
   }
@@ -617,6 +723,20 @@
     .story-points strong { display: block; font-size: 1.05rem; }
     .story-points span.desc { color: var(--choc-soft); font-size: 0.95rem; }
 
+    .social-photo { width: min(260px, 60%); margin: 34px auto 0; }
+    .social-photo-frame {
+      border: 4px solid var(--choc); border-radius: 50%;
+      overflow: hidden; box-shadow: var(--shadow-pop);
+      transition: transform 0.35s var(--ease-bounce);
+    }
+    .social-photo-frame:hover { transform: scale(1.04) rotate(-2deg); }
+    .social-photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1; }
+    .social-photo figcaption {
+      margin-top: 12px; text-align: center;
+      font-size: 0.9rem; font-weight: 600; color: var(--choc-soft);
+    }
+    .social-photo figcaption a { color: var(--pink-deep); }
+
     /* ============ Reviews ============ */
     .reviews-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px;
@@ -663,6 +783,11 @@
     .address-lines a { color: var(--pink-deep); font-weight: 700; text-decoration: none; }
     .address-lines a:hover { text-decoration: underline; }
     .visit-card .btn { margin-top: 6px; }
+    .map-embed {
+      margin-top: 20px; border-radius: 16px; overflow: hidden;
+      border: 3px solid var(--choc); aspect-ratio: 16 / 10; background: var(--cream-2);
+    }
+    .map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
     /* ============ FAQ ============ */
     .faq-list { max-width: 780px; margin: 48px auto 0; display: grid; gap: 16px; }
@@ -1224,6 +1349,14 @@
           <p class="section-kicker">Don't take our word for it</p>
           <h2 class="section-title" id="reviews-title">Loved by locals ⭐</h2>
         </div>
+
+        <figure class="social-photo reveal">
+          <div class="social-photo-frame">
+            <img src="images/real-fb-cones.jpg" alt="Five colourful ice cream scoops in waffle cones, shared on The Ice Hut's Facebook page" width="800" height="750" loading="lazy" onerror="this.closest('figure').remove()" />
+          </div>
+          <figcaption>📸 Straight from our <a href="https://www.facebook.com/morinvilleicehut/" target="_blank" rel="noopener">Facebook page</a></figcaption>
+        </figure>
+
         <div class="reviews-grid reveal-stagger">
           <blockquote class="review-card">
             <div class="review-stars" aria-label="5 stars">★★★★★</div>
@@ -1286,9 +1419,16 @@
               Morinville, Alberta T8R 1R4<br /><br />
               📞 <a href="tel:+17809749944">(780) 974-9944</a><br />
               ✉️ <a href="mailto:dawn@morinvilleicehut.ca">dawn@morinvilleicehut.ca</a><br />
-              👍 <a href="https://www.facebook.com/morinvilleicehut/" rel="noopener" target="_blank">@morinvilleicehut on Facebook</a>
+              👍 <a href="https://www.facebook.com/morinvilleicehut/" rel="noopener" target="_blank">@morinvilleicehut on Facebook</a><br />
+              📸 <a href="https://www.instagram.com/morinvilleicehut/" rel="noopener" target="_blank">@morinvilleicehut on Instagram</a>
             </address>
             <a class="btn btn-primary" href="https://maps.google.com/?q=The+Ice+Hut,+9911+100+Street,+Morinville,+AB" target="_blank" rel="noopener">🧭 Get directions</a>
+            <div class="map-embed">
+              <iframe
+                src="https://maps.google.com/maps?q=The%20Ice%20Hut%2C9911%20100%20Street%2CMorinville%2CAB%20T8R%201R4&amp;output=embed"
+                title="Map showing The Ice Hut at 9911 100 Street, Morinville, Alberta"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -1326,6 +1466,18 @@
           <details>
             <summary>How long has The Ice Hut been around?</summary>
             <p>We've been family-owned and scooping in Morinville since 1995, over three decades of summers and counting.</p>
+          </details>
+          <details>
+            <summary>How much is a milkshake?</summary>
+            <p>Milkshakes are $9.00 for 24oz or $11.00 for 32oz, in any flavour you like.</p>
+          </details>
+          <details>
+            <summary>Is there somewhere to sit?</summary>
+            <p>Yes, there's a grassy area with picnic benches right at the Hut, perfect for enjoying a cone outside on a summer evening.</p>
+          </details>
+          <details>
+            <summary>What payment methods do you accept?</summary>
+            <p>We accept cash, credit card, and debit card.</p>
           </details>
         </div>
       </div>
