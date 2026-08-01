@@ -1,0 +1,302 @@
+[
+  {
+    "slug": "all-canadian-moose",
+    "name": "All Canadian Moose"
+  },
+  {
+    "slug": "banana-chocolate-fudge",
+    "name": "Banana Chocolate Fudge"
+  },
+  {
+    "slug": "banana-split",
+    "name": "Banana Split"
+  },
+  {
+    "slug": "belgian-hazelnut",
+    "name": "Belgian Hazelnut"
+  },
+  {
+    "slug": "birthday-cake",
+    "name": "Birthday Cake"
+  },
+  {
+    "slug": "black-licorice",
+    "name": "Black Licorice"
+  },
+  {
+    "slug": "blast-off",
+    "name": "Blast Off"
+  },
+  {
+    "slug": "blueberry-cheesecake",
+    "name": "Blueberry Cheesecake"
+  },
+  {
+    "slug": "bubble-gum",
+    "name": "Bubble Gum"
+  },
+  {
+    "slug": "burgundy-cherry",
+    "name": "Burgundy Cherry"
+  },
+  {
+    "slug": "butter-pecan",
+    "name": "Butter Pecan"
+  },
+  {
+    "slug": "campfire-smores",
+    "name": "Campfire Smores"
+  },
+  {
+    "slug": "caramel-candy-apple",
+    "name": "Caramel Candy Apple"
+  },
+  {
+    "slug": "caramel-coffee-macchiato-nsa",
+    "name": "Caramel Coffee Macchiato - NSA"
+  },
+  {
+    "slug": "caramel-crunch-nsa",
+    "name": "Caramel Crunch - NSA"
+  },
+  {
+    "slug": "cherry-custard",
+    "name": "Cherry Custard"
+  },
+  {
+    "slug": "chocolate",
+    "name": "Chocolate"
+  },
+  {
+    "slug": "chocolate-covered-strawberry",
+    "name": "Chocolate Covered Strawberry"
+  },
+  {
+    "slug": "chocolate-lactose-free",
+    "name": "Chocolate Lactose-free"
+  },
+  {
+    "slug": "chocolate-peanut-butter",
+    "name": "Chocolate Peanut Butter"
+  },
+  {
+    "slug": "cinnamon-bun",
+    "name": "Cinnamon Bun"
+  },
+  {
+    "slug": "coconut",
+    "name": "Coconut"
+  },
+  {
+    "slug": "coffee-bean",
+    "name": "Coffee Bean"
+  },
+  {
+    "slug": "cookie-beast",
+    "name": "Cookie Beast"
+  },
+  {
+    "slug": "cookie-dough",
+    "name": "Cookie Dough"
+  },
+  {
+    "slug": "cookies-cream",
+    "name": "Cookies & Cream"
+  },
+  {
+    "slug": "cotton-candy",
+    "name": "Cotton Candy"
+  },
+  {
+    "slug": "cream-soda-float",
+    "name": "Cream Soda Float"
+  },
+  {
+    "slug": "creme-brulee",
+    "name": "Creme Brulee"
+  },
+  {
+    "slug": "dunkamoo",
+    "name": "Dunkamoo"
+  },
+  {
+    "slug": "funky-monkey",
+    "name": "Funky Monkey"
+  },
+  {
+    "slug": "grape-float",
+    "name": "Grape Float"
+  },
+  {
+    "slug": "haskap-prairie-berry",
+    "name": "Haskap Prairie Berry"
+  },
+  {
+    "slug": "ice-cream-of-champions",
+    "name": "Ice Cream Of Champions"
+  },
+  {
+    "slug": "kulfi",
+    "name": "Kulfi"
+  },
+  {
+    "slug": "lemon-sorbet",
+    "name": "Lemon - Sorbet"
+  },
+  {
+    "slug": "mango",
+    "name": "Mango"
+  },
+  {
+    "slug": "maple-nut",
+    "name": "Maple Nut"
+  },
+  {
+    "slug": "mint-chocolate-chip",
+    "name": "Mint Chocolate Chip"
+  },
+  {
+    "slug": "mocha-mountain",
+    "name": "Mocha Mountain"
+  },
+  {
+    "slug": "moon-mist",
+    "name": "Moon Mist"
+  },
+  {
+    "slug": "mud-pie",
+    "name": "Mud Pie"
+  },
+  {
+    "slug": "nanaimo-brownie",
+    "name": "Nanaimo Brownie"
+  },
+  {
+    "slug": "new-york-cherry-cheesecake",
+    "name": "New York Cherry Cheesecake"
+  },
+  {
+    "slug": "oh-canada",
+    "name": "Oh Canada"
+  },
+  {
+    "slug": "orange-float",
+    "name": "Orange Float"
+  },
+  {
+    "slug": "passion-fruit-sorbet",
+    "name": "Passion Fruit - Sorbet"
+  },
+  {
+    "slug": "peanut-butter-crunch",
+    "name": "Peanut Butter Crunch"
+  },
+  {
+    "slug": "pineapple-sherbert",
+    "name": "Pineapple Sherbert"
+  },
+  {
+    "slug": "pistachio-with-almonds",
+    "name": "Pistachio With Almonds"
+  },
+  {
+    "slug": "rainbow-sherbert",
+    "name": "Rainbow - Sherbert"
+  },
+  {
+    "slug": "raspberry-cheesecake",
+    "name": "Raspberry Cheesecake"
+  },
+  {
+    "slug": "red-velvet",
+    "name": "Red Velvet"
+  },
+  {
+    "slug": "rocket-pop-sorbet",
+    "name": "Rocket Pop Sorbet"
+  },
+  {
+    "slug": "rocky-road",
+    "name": "Rocky Road"
+  },
+  {
+    "slug": "rootbeer-float",
+    "name": "Rootbeer Float"
+  },
+  {
+    "slug": "rum-raisin",
+    "name": "Rum Raisin"
+  },
+  {
+    "slug": "salted-chocolate-caramel",
+    "name": "Salted Chocolate Caramel"
+  },
+  {
+    "slug": "salted-cookies-cream",
+    "name": "Salted Cookies & Cream"
+  },
+  {
+    "slug": "sangria-sorbet",
+    "name": "Sangria Sorbet"
+  },
+  {
+    "slug": "saskatoon-pie",
+    "name": "Saskatoon Pie"
+  },
+  {
+    "slug": "sea-salt-caramel-fudge",
+    "name": "Sea Salt Caramel Fudge"
+  },
+  {
+    "slug": "shaft",
+    "name": "Shaft"
+  },
+  {
+    "slug": "shark-attack",
+    "name": "Shark Attack"
+  },
+  {
+    "slug": "spiced-hot-chocolate-churro",
+    "name": "Spiced Hot Chocolate Churro"
+  },
+  {
+    "slug": "spumoni-twist",
+    "name": "Spumoni Twist"
+  },
+  {
+    "slug": "strawberry",
+    "name": "Strawberry"
+  },
+  {
+    "slug": "strawberry-sensation",
+    "name": "Strawberry Sensation"
+  },
+  {
+    "slug": "tiger",
+    "name": "Tiger"
+  },
+  {
+    "slug": "toasted-coconut",
+    "name": "Toasted Coconut"
+  },
+  {
+    "slug": "triple-fudge-brownie",
+    "name": "Triple Fudge Brownie"
+  },
+  {
+    "slug": "turtle-mountain",
+    "name": "Turtle Mountain"
+  },
+  {
+    "slug": "vanilla",
+    "name": "Vanilla"
+  },
+  {
+    "slug": "wet-paint",
+    "name": "Wet Paint"
+  },
+  {
+    "slug": "whisky-caramel",
+    "name": "Whisky Caramel"
+  }
+]

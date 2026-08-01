@@ -31,8 +31,16 @@ Previously this was a single page; splitting it out means each topic can rank on
 - **AI image pipeline** (`.github/workflows/generate-images.yml`): edit a prompt in `images/prompts.json`, push, and GitHub Actions regenerates that photography using the free [Pollinations.ai](https://pollinations.ai) Flux API and commits the results back — no design tools or paid APIs needed. Every photo has a built-in fallback: if an image is missing, the site swaps in its hand-drawn SVG illustration automatically.
 - **Auto-deploy** (`.github/workflows/deploy.yml`): every push to `main` publishes the site to GitHub Pages.
 - **Weekly health check** (`.github/workflows/link-check.yml`): validates the HTML and checks for broken links every Monday.
-- **Flavour of the Week**: the spotlight banner rotates through the flavour list automatically every Monday — zero maintenance.
+- **Flavour of the Week**: the spotlight banner rotates through the flavour list automatically every Monday — zero maintenance, and it skips any flavour currently marked out of stock.
 - **Live hours**: the "Open now / Opens at…" pill and highlighted hours row compute themselves in Edmonton time.
+
+## Staff flavour board 🍨
+
+`admin.html` is a password-protected page where staff mark each flavour **In stock**, **Getting low**, or **Out of stock** from their phone. The website reflects the change within seconds — out-of-stock flavours get greyed out and badged, low ones get an amber "Almost out" tag. No redeploy involved.
+
+- **Setup:** see **[ADMIN-SETUP.md](ADMIN-SETUP.md)** — ~10 minutes in the Firebase console, free tier, no credit card.
+- **Where the data lives:** `flavours.html` remains the source of truth for names and descriptions; Firestore stores only a small map of *flavour → status*. That means one tiny request per visitor, no SDK on public pages, and if the database is ever unreachable the site renders exactly as it did before the feature existed.
+- **Adding a flavour:** edit `flavours.html`, then run `python3 scripts/build-flavour-data.py` to refresh `flavours-data.json` and assign internal ids.
 
 ## Highlights
 

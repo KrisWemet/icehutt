@@ -1,0 +1,174 @@
+/* Staff flavour board. Shares the site's palette but stays a separate
+   stylesheet so public visitors never download it. */
+:root {
+  --cream: #EFFAF5;
+  --cream-2: #DCF3E9;
+  --choc: #3A2318;
+  --choc-soft: #6B4630;
+  --pink: #FF5D8F;
+  --pink-deep: #A81E52;
+  --pink-soft: #FFD3E1;
+  --mint: #4FC9B1;
+  --mint-soft: #C9F2E9;
+  --caramel: #FFAE52;
+  --caramel-soft: #FFE3C2;
+  --font-display: 'Shrikhand', 'Fredoka', 'Comic Sans MS', cursive;
+  --font-body: 'Fredoka', 'Trebuchet MS', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--choc);
+  line-height: 1.6;
+  padding-bottom: 60px;
+}
+
+.admin-wrap { width: min(760px, 92%); margin-inline: auto; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 3px solid var(--pink-deep); outline-offset: 2px; border-radius: 6px;
+}
+
+/* ============ Header ============ */
+.admin-header {
+  background: var(--cream-2);
+  border-bottom: 3px solid var(--choc);
+  padding: 12px 0;
+  margin-bottom: 32px;
+}
+.admin-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.admin-brand {
+  font-family: var(--font-display);
+  font-size: 1.25rem; color: var(--choc); text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.admin-brand .cone-mark { font-size: 1.4em; }
+.admin-brand { flex: 0 0 auto; white-space: nowrap; }
+.admin-who {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.88rem; color: var(--choc-soft);
+  min-width: 0;   /* lets the email truncate instead of shoving Sign out off-screen */
+}
+#whoEmail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.btn-plain {
+  font: inherit; font-size: 0.88rem; font-weight: 600;
+  background: none; border: 2px solid var(--choc); border-radius: 999px;
+  padding: 5px 14px; cursor: pointer; color: var(--choc);
+  transition: background 0.2s;
+}
+.btn-plain:hover { background: var(--pink-soft); }
+.btn-plain.danger { border-color: var(--choc-soft); color: var(--choc-soft); }
+.btn-plain.danger:hover { background: var(--pink-soft); color: var(--choc); }
+
+/* ============ Sign in ============ */
+.login-card {
+  background: #fff; border: 3px solid var(--choc); border-radius: 24px;
+  box-shadow: 0 8px 0 rgba(58, 35, 24, 0.9);
+  padding: 32px 28px; max-width: 420px; margin: 40px auto;
+  display: flex; flex-direction: column;
+}
+.login-card h1 { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; }
+.login-sub { color: var(--choc-soft); font-size: 0.92rem; margin: 8px 0 22px; }
+.login-card label { font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; }
+.login-card input {
+  font: inherit; padding: 11px 14px; margin-bottom: 18px;
+  border: 2px solid var(--choc); border-radius: 12px; background: var(--cream);
+}
+.btn-primary {
+  font: inherit; font-weight: 700; cursor: pointer;
+  background: var(--pink); color: var(--choc);
+  border: 3px solid var(--choc); border-radius: 999px;
+  padding: 12px 20px; box-shadow: 0 5px 0 rgba(58, 35, 24, 0.9);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 7px 0 rgba(58, 35, 24, 0.9); }
+.btn-primary:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(58, 35, 24, 0.9); }
+.btn-primary:disabled { opacity: 0.6; cursor: default; transform: none; }
+.form-error { color: var(--pink-deep); font-size: 0.88rem; font-weight: 600; margin-top: 14px; }
+
+/* ============ Board ============ */
+.board-head h1 { font-family: var(--font-display); font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.15; }
+.board-sub { color: var(--choc-soft); font-size: 0.95rem; margin: 10px 0 26px; }
+
+.board-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 6px; }
+.search-field { flex: 1 1 220px; }
+.search-field input {
+  font: inherit; width: 100%; padding: 10px 16px;
+  border: 2px solid var(--choc); border-radius: 999px; background: #fff;
+}
+.filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  background: #fff; color: var(--choc);
+  border: 2px solid var(--choc); border-radius: 999px; padding: 7px 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background 0.2s;
+}
+.chip:hover { background: var(--cream-2); }
+.chip.is-active { background: var(--choc); color: #fff; }
+.chip-count {
+  font-size: 0.75rem; font-weight: 700; background: rgba(58, 35, 24, 0.12);
+  border-radius: 999px; padding: 1px 7px; min-width: 22px; text-align: center;
+}
+.chip.is-active .chip-count { background: rgba(255, 255, 255, 0.25); }
+
+.save-state { min-height: 24px; font-size: 0.85rem; font-weight: 600; margin: 10px 0 4px; }
+.save-state.is-pending { color: var(--choc-soft); }
+.save-state.is-ok { color: #1E7A5F; }
+.save-state.is-error { color: var(--pink-deep); }
+
+.flavour-rows { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.flavour-row {
+  background: #fff; border: 3px solid var(--choc); border-radius: 16px;
+  padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  flex-wrap: wrap;
+  border-left-width: 10px;
+}
+.flavour-row.status-in_stock     { border-left-color: var(--mint); }
+.flavour-row.status-getting_low  { border-left-color: var(--caramel); }
+.flavour-row.status-out_of_stock { border-left-color: var(--pink-deep); background: #FBF3F6; }
+.flavour-row-name { font-weight: 600; flex: 1 1 160px; }
+.flavour-row.status-out_of_stock .flavour-row-name { color: var(--choc-soft); }
+
+.status-toggle {
+  display: flex; border: 2px solid var(--choc); border-radius: 999px;
+  overflow: hidden; background: var(--cream);
+}
+.status-btn {
+  font: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+  background: none; border: none; color: var(--choc-soft);
+  padding: 8px 13px; white-space: nowrap;
+  transition: background 0.18s, color 0.18s;
+}
+.status-btn + .status-btn { border-left: 2px solid rgba(58, 35, 24, 0.25); }
+.status-btn:hover { background: rgba(58, 35, 24, 0.08); color: var(--choc); }
+.status-btn.is-on { color: var(--choc); font-weight: 700; }
+.status-btn--in_stock.is-on     { background: var(--mint); }
+.status-btn--getting_low.is-on  { background: var(--caramel); }
+.status-btn--out_of_stock.is-on { background: var(--pink-deep); color: #fff; }
+
+.empty-note, .boot-note { color: var(--choc-soft); text-align: center; padding: 30px 0; }
+.board-footer { margin-top: 30px; text-align: center; }
+
+@media (max-width: 560px) {
+  .admin-brand { font-size: 1.05rem; }
+  .admin-brand span:last-child { white-space: nowrap; }
+  .admin-who { font-size: 0.78rem; gap: 8px; }
+  .btn-plain { white-space: nowrap; padding: 5px 11px; }
+
+  /* Stack the row, but don't let the name's flex-grow stretch it vertically */
+  .flavour-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .flavour-row-name { flex: 0 0 auto; }
+  .status-toggle { width: 100%; }
+  .status-btn { flex: 1; padding: 10px 6px; }
+}

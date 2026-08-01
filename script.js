@@ -100,16 +100,33 @@
 
   /* ---------- Flavour of the week (rotates automatically every Monday) ---------- */
   var fotwEl = document.getElementById('fotw');
-  if (fotwEl) {
-    var FLAVOURS = [
-      'Chocolate Peanut Butter', 'New York Cherry Cheesecake', 'Sea Salt Caramel Fudge',
-      'Tiger', 'All Canadian Moose', 'Mint Chocolate Chip', 'Bubble Gum', 'Cotton Candy',
-      'Saskatoon Pie', 'Haskap Prairie Berry', 'Cookie Beast', 'Birthday Cake',
-      'Campfire Smores', 'Nanaimo Brownie', 'Moon Mist', 'Shark Attack'
-    ];
-    var weekIndex = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
-    fotwEl.textContent = FLAVOURS[weekIndex % FLAVOURS.length];
+  var FOTW_FLAVOURS = [
+    'Chocolate Peanut Butter', 'New York Cherry Cheesecake', 'Sea Salt Caramel Fudge',
+    'Tiger', 'All Canadian Moose', 'Mint Chocolate Chip', 'Bubble Gum', 'Cotton Candy',
+    'Saskatoon Pie', 'Haskap Prairie Berry', 'Cookie Beast', 'Birthday Cake',
+    'Campfire Smores', 'Nanaimo Brownie', 'Moon Mist', 'Shark Attack'
+  ];
+  // Same rule the build script uses to turn a name into a data-flavour value.
+  function slugify(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   }
+  // byStatus is optional: on first paint we don't know stock yet, so we just
+  // take this week's pick. Once statuses load we run again and step past
+  // anything that's sold out — promoting a flavour nobody can buy is worse
+  // than promoting the next one along.
+  function pickFotw(byStatus) {
+    if (!fotwEl) return;
+    var start = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+    for (var i = 0; i < FOTW_FLAVOURS.length; i++) {
+      var name = FOTW_FLAVOURS[(start + i) % FOTW_FLAVOURS.length];
+      if (!byStatus || byStatus[slugify(name)] !== 'out_of_stock') {
+        fotwEl.textContent = name;
+        return;
+      }
+    }
+    // Everything on the shortlist is out — leave this week's pick as-is.
+  }
+  pickFotw(null);
 
   /* ---------- Dynamic year + years-scooping ---------- */
   var yearEl = document.getElementById('year');
@@ -251,5 +268,66 @@
       requestAnimationFrame(draw);
     }
     requestAnimationFrame(draw);
+  }
+
+  /* ---------- Live flavour availability ----------
+     Staff set each flavour's status from admin.html. We only fetch the
+     exceptions (anything not "in stock") and decorate those. If the request
+     fails for any reason the page simply stays as it is — every flavour reads
+     as available, exactly like it did before this feature existed. */
+  var cfg = window.ICEHUT_FIREBASE;
+  var stockTargets = document.querySelectorAll('[data-flavour]');
+  if (cfg && cfg.projectId.indexOf('REPLACE_ME') === -1 && stockTargets.length) {
+    var LABELS = { out_of_stock: 'Out of stock', getting_low: 'Almost out' };
+
+    // The whole board lives in one small Firestore document, so this is a
+    // single request and no SDK — visitors download nothing extra.
+    fetch('https://firestore.googleapis.com/v1/projects/' + cfg.projectId +
+          '/databases/(default)/documents/board/flavours?key=' + cfg.apiKey)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (doc) {
+        var map = doc && doc.fields && doc.fields.statuses &&
+                  doc.fields.statuses.mapValue && doc.fields.statuses.mapValue.fields;
+        if (!map) return;
+
+        var byStatus = {};
+        Object.keys(map).forEach(function (slug) { byStatus[slug] = map[slug].stringValue; });
+
+        pickFotw(byStatus);   // don't spotlight a flavour that's sold out
+
+        // Counted as a set of slugs, not of elements: a flavour can appear both
+        // as a spotlight card and as an A–Z entry, and that's still one flavour.
+        var outSlugs = {};
+        Array.prototype.forEach.call(stockTargets, function (el) {
+          var slug = el.getAttribute('data-flavour');
+          var status = byStatus[slug];
+          if (!LABELS[status]) return;
+          if (status === 'out_of_stock') outSlugs[slug] = true;
+
+          el.classList.add(status === 'out_of_stock' ? 'flavour-out' : 'flavour-low');
+
+          var badge = document.createElement('span');
+          badge.className = 'stock-badge stock-badge--' + (status === 'out_of_stock' ? 'out' : 'low');
+          badge.textContent = LABELS[status];
+
+          // Cards get the badge pinned in the corner; A–Z entries get it inline
+          // after the name so the alphabetical rhythm isn't broken.
+          var dt = el.querySelector('dt');
+          if (dt) dt.appendChild(badge);
+          else el.appendChild(badge);
+        });
+
+        // Only the full A–Z board gets the summary note; it'd be misleading on
+        // the 8-card teaser, which isn't showing the whole board.
+        var note = document.getElementById('stockNote');
+        var outCount = Object.keys(outSlugs).length;
+        if (note && outCount) {
+          note.textContent = outCount === 1
+            ? '1 flavour is off the board right now.'
+            : outCount + ' flavours are off the board right now.';
+          note.hidden = false;
+        }
+      })
+      .catch(function () { /* silent: the board just shows everything as usual */ });
   }
 })();
