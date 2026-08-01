@@ -721,3 +721,9 @@ section { padding: 96px 24px; position: relative; }
   html { scroll-behavior: auto; }
   .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
 }
+/* ============ Type ramp utilities ============ */
+/* Documented in DESIGN.md typography as the `small` and `fine` roles. */
+.text-small { font-size: 0.95rem; line-height: 1.5; color: var(--choc-soft); }
+.text-fine  { font-size: 0.92rem; line-height: 1.45; color: var(--choc-soft); }
+.note-seasonal { margin-top: 16px; font-weight: 600; }
+.note-drinks { margin-top: 14px; }

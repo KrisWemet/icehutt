@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-01T00:00:00Z",
+  "title": "Design System: The Ice Hut",
+  "extensions": {
+    "colorMeta": {
+      "pink": { "role": "primary", "displayName": "Bubblegum Pink", "canonical": "#FF5D8F", "tonalRamp": ["#3D0A1D", "#5C1029", "#8A1A3E", "#C22B5D", "#FF5D8F", "#FF8FAF", "#FFBACF", "#FFE4EC"] },
+      "pink-deep": { "role": "primary", "displayName": "Cherry Ink", "canonical": "#A81E52", "tonalRamp": ["#2B0714", "#460C21", "#6B1233", "#8A1843", "#A81E52", "#D14D7C", "#E894B0", "#F9DCE6"] },
+      "pink-soft": { "role": "primary", "displayName": "Cotton Candy", "canonical": "#FFD3E1", "tonalRamp": ["#4A2733", "#6E3A4C", "#9C5570", "#C97C97", "#E5A8BD", "#FFD3E1", "#FFE7EE", "#FFF6F9"] },
+      "mint": { "role": "secondary", "displayName": "Scoop Mint", "canonical": "#4FC9B1", "tonalRamp": ["#0C2E28", "#12463D", "#1A6959", "#268D77", "#37AB92", "#4FC9B1", "#8FDECF", "#D3F4EC"] },
+      "mint-soft": { "role": "secondary", "displayName": "Mint Cream", "canonical": "#C9F2E9", "tonalRamp": ["#20463F", "#2F665C", "#43897C", "#5FAB9C", "#8ACBBD", "#AEE0D5", "#C9F2E9", "#EAFBF7"] },
+      "caramel": { "role": "tertiary", "displayName": "Butter Caramel", "canonical": "#FFAE52", "tonalRamp": ["#3D2408", "#5C360C", "#8A5112", "#B86D19", "#E08A2E", "#FFAE52", "#FFCB92", "#FFE9D1"] },
+      "caramel-soft": { "role": "tertiary", "displayName": "Caramel Cream", "canonical": "#FFE3C2", "tonalRamp": ["#4A3A26", "#6E5637", "#9C784C", "#C79C68", "#E4C295", "#FFE3C2", "#FFEFDC", "#FFF8F0"] },
+      "berry": { "role": "tertiary", "displayName": "Grape Berry", "canonical": "#8C5BD8", "tonalRamp": ["#1F1136", "#301A52", "#472777", "#5F369C", "#7546BE", "#8C5BD8", "#B292E7", "#DFD1F6"] },
+      "sky": { "role": "tertiary", "displayName": "Slushie Sky", "canonical": "#8ED8F0", "tonalRamp": ["#123039", "#1B4854", "#276878", "#37899E", "#5BB0C6", "#8ED8F0", "#BCE9F7", "#E4F6FC"] },
+      "choc": { "role": "neutral", "displayName": "Chocolate Ink", "canonical": "#3A2318", "tonalRamp": ["#160D08", "#241611", "#3A2318", "#563525", "#6B4630", "#96674B", "#C09B80", "#E6D4C6"] },
+      "choc-soft": { "role": "neutral", "displayName": "Cocoa Soft", "canonical": "#6B4630", "tonalRamp": ["#1C120C", "#2E1E14", "#472E1F", "#6B4630", "#8C6045", "#B18563", "#D2B195", "#EDDDCE"] },
+      "cream": { "role": "neutral", "displayName": "Mint Paper", "canonical": "#EFFAF5", "tonalRamp": ["#1E2E28", "#2F473F", "#456659", "#628A7B", "#8FB3A5", "#C0D9CF", "#EFFAF5", "#FAFEFC"] },
+      "cream-2": { "role": "neutral", "displayName": "Mint Paper Deep", "canonical": "#DCF3E9", "tonalRamp": ["#1D302A", "#2C4941", "#41685D", "#5D8C7E", "#89B2A4", "#B6D6C9", "#DCF3E9", "#F2FBF7"] },
+      "paper": { "role": "neutral", "displayName": "Card Paper", "canonical": "#FFFFFF", "tonalRamp": ["#2B2B2B", "#454545", "#636363", "#878787", "#ABABAB", "#D2D2D2", "#F0F0F0", "#FFFFFF"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The home hero headline only. One per site." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles and subpage h1s." },
+      "title": { "displayName": "Title", "purpose": "Card headings and the footer brand mark." },
+      "lead": { "displayName": "Lead", "purpose": "Hero subheading and section standfirsts, capped near 34rem." },
+      "body": { "displayName": "Body", "purpose": "All running text." },
+      "label": { "displayName": "Label", "purpose": "Uppercase section kickers and footer column headings." }
+    },
+    "shadows": [
+      { "name": "pop", "value": "0 8px 0 rgba(58, 35, 24, 0.9)", "purpose": "Default raised card. Zero blur — the sticker lift." },
+      { "name": "pop-sm", "value": "5px 5px 0 #3A2318", "purpose": "Diagonal variant for smaller or tilted surfaces: FAQ accordions, story items." },
+      { "name": "pop-sheet", "value": "6px 6px 0 #3A2318", "purpose": "Mobile nav sheet and the flavour-of-the-week banner." },
+      { "name": "button-rest", "value": "0 6px 0 #3A2318", "purpose": "Button at rest." },
+      { "name": "button-hover", "value": "0 10px 0 #3A2318", "purpose": "Button lifted 4px on hover." },
+      { "name": "button-active", "value": "0 3px 0 #3A2318", "purpose": "Button pressed 2px into the page." },
+      { "name": "soft", "value": "0 20px 50px -20px rgba(58, 35, 24, 0.35)", "purpose": "The only ambient shadow. Dark story card and CTA banner exclusively." }
+    ],
+    "motion": [
+      { "name": "ease-bounce", "value": "cubic-bezier(0.34, 1.56, 0.64, 1)", "purpose": "Default easing. Overshoots so elements read as having weight." },
+      { "name": "state", "value": "0.25s", "purpose": "Button and nav state transitions." },
+      { "name": "reveal", "value": "0.6s–0.7s", "purpose": "Scroll-reveal entrances, staggered 90ms per sibling." },
+      { "name": "ambient", "value": "12s–18s", "purpose": "Blob morph, Ken Burns photo drift, badge rotation. Slow enough to ignore." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "960px" },
+      { "name": "sm", "value": "700px" },
+      { "name": "xs", "value": "560px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main call to action. Presses into the page when clicked.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">🍨 See the flavours</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 10px; font-family: Fredoka, system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; text-decoration: none; padding: 15px 30px; border-radius: 999px; border: 3px solid #3A2318; cursor: pointer; box-shadow: 0 6px 0 #3A2318; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s; } .ds-btn-primary { background: #FF5D8F; color: #3A2318; } .ds-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 0 #3A2318; } .ds-btn:active { transform: translateY(2px); box-shadow: 0 3px 0 #3A2318; } .ds-btn:focus-visible { outline: 3px solid #8C5BD8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action. Same physics, white fill.",
+      "html": "<a class=\"ds-btn ds-btn-ghost\" href=\"#\">📍 Find the Hut</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 10px; font-family: Fredoka, system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; text-decoration: none; padding: 15px 30px; border-radius: 999px; border: 3px solid #3A2318; cursor: pointer; box-shadow: 0 6px 0 #3A2318; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s; } .ds-btn-ghost { background: #fff; color: #3A2318; } .ds-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 0 #3A2318; } .ds-btn:active { transform: translateY(2px); box-shadow: 0 3px 0 #3A2318; } .ds-btn:focus-visible { outline: 3px solid #8C5BD8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The core raised surface: outlined, hard-shadowed, white on mint.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Sea Salt Caramel Fudge</h3><p class=\"ds-card-body\">Vanilla loaded with fudge chunks and a salty caramel swirl.</p></div>",
+      "css": ".ds-card { background: #fff; border: 3px solid #3A2318; border-radius: 24px; padding: 30px; box-shadow: 0 8px 0 rgba(58,35,24,0.9); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); max-width: 320px; } .ds-card:hover { transform: translateY(-8px) rotate(-0.6deg); } .ds-card-title { font-family: Shrikhand, cursive; font-size: 1.15rem; line-height: 1.12; margin: 0 0 6px; color: #3A2318; } .ds-card-body { font-family: Fredoka, system-ui, sans-serif; font-size: 0.92rem; line-height: 1.45; color: #6B4630; margin: 0; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header link with a pill hit-area; the current page fills solid pink.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Flavours</a><a href=\"#\" aria-current=\"page\">Menu</a><a href=\"#\">Visit</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 6px; } .ds-nav a { font-family: Fredoka, system-ui, sans-serif; font-weight: 600; text-decoration: none; color: #3A2318; padding: 8px 14px; border-radius: 999px; transition: background 0.25s, transform 0.25s; } .ds-nav a:hover { background: #FFD3E1; transform: translateY(-2px); } .ds-nav a[aria-current=\"page\"] { background: #FF5D8F; color: #3A2318; } .ds-nav a:focus-visible { outline: 3px solid #8C5BD8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "custom",
+      "refersTo": "status-pill",
+      "description": "Live open/closed indicator. The dot pulses only because the data is genuinely live.",
+      "html": "<span class=\"ds-status\"><span class=\"ds-status-dot\"></span>Open now · until 9:30pm</span>",
+      "css": ".ds-status { display: inline-flex; align-items: center; gap: 8px; font-family: Fredoka, system-ui, sans-serif; font-weight: 700; font-size: 0.85rem; background: #3A2318; color: #EFFAF5; padding: 8px 16px; border-radius: 999px; white-space: nowrap; } .ds-status-dot { width: 9px; height: 9px; border-radius: 50%; background: #62D98A; animation: ds-pulse 1.8s ease-in-out infinite; } @keyframes ds-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(98,217,138,0.7); } 55% { box-shadow: 0 0 0 7px rgba(98,217,138,0); } }"
+    },
+    {
+      "name": "Dietary Chip",
+      "kind": "chip",
+      "refersTo": "chip-diet",
+      "description": "Factual dietary tag on the flavour glossary. Only shown when the shop publishes it.",
+      "html": "<span class=\"ds-chip-diet\">Dairy-Free</span>",
+      "css": ".ds-chip-diet { display: inline-block; font-family: Fredoka, system-ui, sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: #C9F2E9; color: #3A2318; border-radius: 999px; padding: 2px 8px; vertical-align: middle; }"
+    },
+    {
+      "name": "Favourite Chip",
+      "kind": "chip",
+      "refersTo": "chip-favourite",
+      "description": "Emphatic menu flag, e.g. 'for dogs!' or '3 flavours!'.",
+      "html": "<span class=\"ds-chip-fav\">for dogs!</span>",
+      "css": ".ds-chip-fav { display: inline-block; font-family: Fredoka, system-ui, sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: #FFAE52; color: #3A2318; border-radius: 999px; padding: 3px 9px; vertical-align: middle; }"
+    },
+    {
+      "name": "Section Kicker",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Uppercase Cherry label that sits above every section headline.",
+      "html": "<p class=\"ds-kicker\">The good stuff</p><h2 class=\"ds-headline\">Flavours worth the drive</h2>",
+      "css": ".ds-kicker { font-family: Fredoka, system-ui, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; color: #A81E52; margin: 0 0 10px; } .ds-headline { font-family: Shrikhand, cursive; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.12; color: #3A2318; margin: 0; }"
+    },
+    {
+      "name": "Menu Row",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Dotted-leader price row used throughout the menu.",
+      "html": "<div class=\"ds-menu-row\"><span>Giant <span class=\"ds-chip-fav\">3 flavours!</span></span><span class=\"ds-dots\"></span><span class=\"ds-price\">$9.00</span></div>",
+      "css": ".ds-menu-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 2px dashed #DCF3E9; font-family: Fredoka, system-ui, sans-serif; font-weight: 500; color: #3A2318; } .ds-dots { flex: 1; border-bottom: 2px dotted rgba(58,35,24,0.25); transform: translateY(-4px); } .ds-price { font-weight: 700; color: #A81E52; white-space: nowrap; } .ds-chip-fav { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: #FFAE52; color: #3A2318; border-radius: 999px; padding: 3px 9px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sticker Sheet",
+    "overview": "Everything in this system behaves like a die-cut vinyl sticker pressed onto a sheet of mint paper. Surfaces are outlined in a thick chocolate ink line, they cast a hard shadow with no blur at all, and they sit on the page rather than floating above it. Nothing is glassy, nothing is misty, nothing fades into its background. The world is legible from across a parking lot, which is roughly the viewing distance this business actually operates at.\n\nThe palette is a confectionery one — pink, mint, caramel, berry — but it is disciplined by a single dark brown that does all the structural work: every border, every shadow, every piece of body text. That brown is what stops the brightness from turning into noise. The type pairing runs the same way: Shrikhand carries all the personality in headings and does none of the reading work, while Fredoka handles every sentence in a plain, friendly, high-legibility voice.\n\nThe register is playful but never childish, and never precious. This is a thirty-year-old family business whose defining trait is that the portions are absurd; the design should feel generous and confident in the same way. Motion overshoots slightly on interaction — things bounce back like they have weight — but nothing loops forever demanding attention.",
+    "keyCharacteristics": [
+      "Hard-edged: 3px ink outlines and zero-blur offset shadows on every raised surface",
+      "Bright but anchored: five candy hues held together by one structural brown",
+      "Pill-shaped interactivity: anything clickable is fully rounded",
+      "Display type for personality, body type for everything you actually read",
+      "Motion with overshoot and weight, never ambient drift"
+    ],
+    "rules": [
+      { "name": "The Two Pinks Rule", "body": "Bubblegum fills, Cherry writes. #FF5D8F may back a shape but must never be the colour of text on a light surface; #A81E52 is the accent text colour and should not be used as a large fill. Every text-on-background pair in this system clears WCAG AA (4.5:1), and this split is how that stays true.", "section": "colors" },
+      { "name": "The One Brown Rule", "body": "Borders, shadows, and body copy are all Chocolate Ink. Do not introduce a second neutral, a grey, or a pure black. Depth and structure come from one colour used consistently.", "section": "colors" },
+      { "name": "The Shrikhand Ceiling Rule", "body": "The display face is for headings, the brand mark, and large numerals. It never sets a paragraph, a label, a button, or a menu row. It has one weight and no italic — if a design needs emphasis inside display type, change the size or the colour, not the weight.", "section": "typography" },
+      { "name": "The 11px Floor Rule", "body": "No functional text — chips, labels, prices, captions, nav — renders below 11px at any viewport. Decorative micro-labels are still functional and are still in scope.", "section": "typography" },
+      { "name": "The Zero-Blur Rule", "body": "Raised surfaces cast a hard offset shadow with a blur radius of 0. If a new component needs a soft glow to look right, the component is wrong for this system — not the rule.", "section": "elevation" },
+      { "name": "The Ink Outline Rule", "body": "Every raised surface carries a 3px solid Chocolate Ink border (4px on hero media and the story photo). There are no borderless cards. The outline and the hard shadow are a matched pair; never ship one without the other.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do pair every 3px Chocolate Ink outline with a zero-blur Pop shadow.",
+      "Do use pink for fills and pink-deep for accent text — the Two Pinks Rule keeps the whole system at WCAG AA.",
+      "Do make anything clickable a 999px pill.",
+      "Do animate transform and opacity only. Buttons and cards move; layout boxes do not.",
+      "Do respect prefers-reduced-motion — the reduced-motion block neutralises every animation and reveals all scroll-hidden content.",
+      "Do keep display type (Shrikhand) out of body copy, buttons, and labels."
+    ],
+    "donts": [
+      "Don't apply a gradient to text via background-clip: text. It was removed from the hero deliberately; the wavy caramel underline replaced it.",
+      "Don't add a coloured stripe along one edge of a card. Removed from the flavour cards on purpose.",
+      "Don't build an infinitely auto-scrolling marquee. The facts strip is a static wrapping row, and that was a deliberate downgrade from a ticker.",
+      "Don't animate padding, width, height, or margin. The header's padding transition was removed for exactly this reason.",
+      "Don't introduce grey, pure black, or a second neutral. One brown does all structural work.",
+      "Don't put a pulsing dot on anything that isn't reporting genuinely live, changing data.",
+      "Don't let functional text fall below 11px, including inside the footer.",
+      "Don't use a soft/blurred shadow on a light surface — that shadow belongs only to the dark story card and CTA banner."
+    ]
+  }
+}
