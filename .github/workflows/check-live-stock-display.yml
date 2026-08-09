@@ -1,0 +1,44 @@
+name: Check live stock display
+
+on:
+  workflow_dispatch:
+
+jobs:
+  look:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null
+          npm i playwright >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+
+      - name: Load the live public site as a visitor would
+        run: |
+          cat > look.mjs <<'JS'
+          import { chromium } from 'playwright';
+          const b = await chromium.launch();
+          for (const path of ['flavours.html', 'index.html']) {
+            const pg = await b.newPage({ viewport: { width: 1400, height: 1000 } });
+            await pg.goto('https://morinville-ice-hut.vercel.app/' + path, { waitUntil: 'networkidle' });
+            await pg.waitForTimeout(3000);
+            const r = await pg.evaluate(() => ({
+              outCount:  document.querySelectorAll('.flavour-out').length,
+              lowCount:  document.querySelectorAll('.flavour-low').length,
+              badges:    [...document.querySelectorAll('.stock-badge')].map(b => b.textContent.trim()),
+              note:      (document.getElementById('stockNote') || {}).textContent || null,
+              // what the greyed-out card actually looks like to a visitor
+              sample:    (() => {
+                const el = document.querySelector('.flavour-out');
+                if (!el) return null;
+                const cs = getComputedStyle(el);
+                return { opacity: cs.opacity, filter: cs.filter, text: el.innerText.replace(/\s+/g,' ').slice(0,90) };
+              })()
+            }));
+            console.log('=== ' + path + ' ===');
+            console.log(JSON.stringify(r, null, 2));
+            await pg.close();
+          }
+          await b.close();
+          JS
+          node look.mjs
