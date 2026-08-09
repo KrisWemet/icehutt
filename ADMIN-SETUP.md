@@ -4,8 +4,16 @@ The staff page at **`/admin.html`** lets anyone at the shop mark a flavour as
 **In stock**, **Getting low**, or **Out of stock**. The website picks the change
 up within seconds — no redeploy, no code.
 
-Everything is written and tested. What's left is about 10 minutes of clicking in
-the Firebase console to create the free database and the two logins.
+Everything is written and tested. What's left is the Firebase project itself.
+
+**Two ways to do it:**
+
+- **Fast path (recommended):** if you have the Firebase MCP server wired into
+  Claude Code, most of this is automated — see
+  [Fast path: let Claude do it](#fast-path-let-claude-do-it) at the bottom.
+  Console time drops to about 2 minutes (enabling password login and adding the
+  two users, which have no API).
+- **Manual path:** follow Steps 1-6 below, about 10 minutes of clicking.
 
 ---
 
@@ -145,3 +153,44 @@ which is the list the staff page shows. Commit both files.
 
 Renaming a flavour gives it a new id, so it starts fresh at "In stock" — worth
 knowing if you rename one that's currently marked out.
+
+
+---
+
+## Fast path: let Claude do it
+
+The Firebase CLI ships an MCP server, so Claude Code on your own machine can
+create the project, the database, the web app, and deploy the rules for you.
+
+### One-time setup
+
+```bash
+claude mcp remove firebase-mcp                                       # if you added it before
+claude mcp add firebase-mcp -- npx -y firebase-tools mcp --only auth,firestore
+firebase login                                                       # opens your browser
+```
+
+The `--only auth,firestore` matters: without it the server loads a smaller
+toolset that can't create the Firestore database.
+
+### Then, from a Claude Code session in this repo
+
+Ask it to run this sequence. It has a tool for each step:
+
+1. `firebase_create_project` — project id `icehut`
+2. `firestore_create_database` — location `northamerica-northeast1`
+3. `firebase deploy --only firestore:rules` — picks up `firebase.json` and
+   `firestore.rules`, already committed here
+4. `firebase_create_app` — platform `web`, nickname `website`
+5. `firebase_get_sdk_config` — returns the three values below
+
+Then paste those three into `firebase-config.js` and push.
+
+### What still needs the console (~2 min)
+
+The MCP server has no tool for either of these:
+
+- **Authentication → Get started → Email/Password → Enable** (Step 2 above)
+- **Authentication → Users → Add user**, twice (Step 3 above)
+
+Do those two by hand and everything else can be automated.
