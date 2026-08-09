@@ -1,0 +1,79 @@
+name: Verify flavour board
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/verify-flavour-board.yml']
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: End-to-end check against the live project
+        env:
+          URL: https://svyxxcsjvchpqzgijvmw.supabase.co
+          KEY: sb_publishable_bF_E5MgDa7J9Plf-ihpGeA_fqmWe1Sz
+          STAFF_PW: ${{ secrets.ICEHUT_STAFF_PW }}
+        run: |
+          set -e
+          pass(){ echo "PASS: $1"; }
+          fail(){ echo "FAIL: $1"; exit 1; }
+
+          echo "--- 1. anonymous read (what every visitor does) ---"
+          code=$(curl -sS -o /tmp/r.json -w '%{http_code}' \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            "$URL/rest/v1/flavour_status?select=slug,status")
+          [ "$code" = "200" ] || fail "anon read got $code"
+          pass "anon read 200 -> $(cat /tmp/r.json)"
+
+          echo "--- 2. anonymous write must be REFUSED ---"
+          code=$(curl -sS -o /tmp/w.json -w '%{http_code}' -X POST \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            -H 'Content-Type: application/json' \
+            -d '{"slug":"hacker-test","status":"out_of_stock"}' \
+            "$URL/rest/v1/flavour_status")
+          case "$code" in
+            401|403) pass "anon write correctly refused ($code)" ;;
+            *) fail "anon write returned $code -- RLS IS NOT PROTECTING THE TABLE"; ;;
+          esac
+
+          echo "--- 3. staff sign-in ---"
+          if [ -z "$STAFF_PW" ]; then echo "SKIP: no ICEHUT_STAFF_PW secret set"; exit 0; fi
+          TOKEN=$(curl -sS -X POST "$URL/auth/v1/token?grant_type=password" \
+            -H "apikey: $KEY" -H 'Content-Type: application/json' \
+            -d "{\"email\":\"staff@morinvilleicehut.ca\",\"password\":\"$STAFF_PW\"}" \
+            | python3 -c 'import json,sys; print(json.load(sys.stdin).get("access_token",""))')
+          [ -n "$TOKEN" ] || fail "sign-in did not return a token"
+          pass "staff signed in"
+
+          echo "--- 4. staff write ---"
+          code=$(curl -sS -o /tmp/sw.json -w '%{http_code}' -X POST \
+            -H "apikey: $KEY" -H "Authorization: Bearer $TOKEN" \
+            -H 'Content-Type: application/json' -H 'Prefer: resolution=merge-duplicates' \
+            -d '{"slug":"tiger","status":"out_of_stock"}' \
+            "$URL/rest/v1/flavour_status")
+          echo "$code $(cat /tmp/sw.json)"
+          [ "$code" = "201" ] || [ "$code" = "200" ] || fail "staff write got $code"
+          pass "staff write accepted"
+
+          echo "--- 5. the write is publicly visible ---"
+          curl -sS -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            "$URL/rest/v1/flavour_status?select=slug,status" | tee /tmp/r2.json
+          grep -q tiger /tmp/r2.json || fail "written row not readable anonymously"
+          pass "row visible to visitors"
+
+          echo "--- 6. staff delete (the 'back in stock' path) ---"
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -X DELETE \
+            -H "apikey: $KEY" -H "Authorization: Bearer $TOKEN" \
+            "$URL/rest/v1/flavour_status?slug=eq.tiger")
+          [ "$code" = "204" ] || [ "$code" = "200" ] || fail "staff delete got $code"
+          pass "staff delete accepted"
+
+          echo "--- 7. board is clean again ---"
+          curl -sS -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            "$URL/rest/v1/flavour_status?select=slug" | tee /tmp/r3.json
+          grep -q tiger /tmp/r3.json && fail "row survived the delete"
+          pass "board clean"
+          echo "ALL CHECKS PASSED"

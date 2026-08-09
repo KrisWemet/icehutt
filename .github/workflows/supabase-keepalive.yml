@@ -1,0 +1,24 @@
+name: Supabase keep-alive
+
+# Supabase pauses a free project after ~7 days with no activity. The Ice Hut is
+# closed October through April, so without this the flavour board would sleep
+# every winter and need waking by hand each spring. One tiny read per week is
+# enough to keep it awake, and it costs nothing.
+on:
+  schedule:
+    - cron: '0 12 * * 1'   # Mondays, 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read one row from the flavour board
+        run: |
+          URL="https://svyxxcsjvchpqzgijvmw.supabase.co/rest/v1/flavour_status?select=slug&limit=1"
+          KEY="sb_publishable_bF_E5MgDa7J9Plf-ihpGeA_fqmWe1Sz"
+          code=$(curl -sS -o /tmp/out.json -w '%{http_code}' \
+                   -H "apikey: $KEY" -H "Authorization: Bearer $KEY" "$URL")
+          echo "HTTP $code"; cat /tmp/out.json; echo
+          # 200 with an empty array is the normal state: no flavour is flagged.
+          test "$code" = "200"

@@ -275,23 +275,25 @@
      exceptions (anything not "in stock") and decorate those. If the request
      fails for any reason the page simply stays as it is — every flavour reads
      as available, exactly like it did before this feature existed. */
-  var cfg = window.ICEHUT_FIREBASE;
+  var cfg = window.ICEHUT_SUPABASE;
   var stockTargets = document.querySelectorAll('[data-flavour]');
-  if (cfg && cfg.projectId.indexOf('REPLACE_ME') === -1 && stockTargets.length) {
+  if (cfg && cfg.url && cfg.url.indexOf('REPLACE_ME') === -1 && stockTargets.length) {
     var LABELS = { out_of_stock: 'Out of stock', getting_low: 'Almost out' };
 
-    // The whole board lives in one small Firestore document, so this is a
-    // single request and no SDK — visitors download nothing extra.
-    fetch('https://firestore.googleapis.com/v1/projects/' + cfg.projectId +
-          '/databases/(default)/documents/board/flavours?key=' + cfg.apiKey)
+    // Only the exceptions are stored, so this is one small request and no SDK —
+    // visitors download nothing extra. An empty table means everything is in.
+    fetch(cfg.url + '/rest/v1/flavour_status?select=slug,status', {
+      headers: {
+        apikey: cfg.publishableKey,
+        Authorization: 'Bearer ' + cfg.publishableKey
+      }
+    })
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function (doc) {
-        var map = doc && doc.fields && doc.fields.statuses &&
-                  doc.fields.statuses.mapValue && doc.fields.statuses.mapValue.fields;
-        if (!map) return;
+      .then(function (rows) {
+        if (!rows || !rows.length) return;
 
         var byStatus = {};
-        Object.keys(map).forEach(function (slug) { byStatus[slug] = map[slug].stringValue; });
+        rows.forEach(function (row) { byStatus[row.slug] = row.status; });
 
         pickFotw(byStatus);   // don't spotlight a flavour that's sold out
 
