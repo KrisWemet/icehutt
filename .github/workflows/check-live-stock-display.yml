@@ -2,6 +2,9 @@ name: Check live stock display
 
 on:
   workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/check-live-stock-display.yml']
 
 jobs:
   look:
