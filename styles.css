@@ -634,9 +634,30 @@ section { padding: 96px 24px; position: relative; }
   border-radius: 999px; padding: 2px 8px; margin-left: 6px;
   vertical-align: middle;
 }
+/* Allergen tags. These state what a flavour CONTAINS, never what it's free of —
+   a missing tag is not a safety claim, and the note under the board says so.
+   Source: the allergen classes on the shop's own menu (site-reference/menu.html). */
+.diet-tag--nuts, .diet-tag--gluten, .diet-tag--eggs { border: 2px solid var(--choc); }
+
+/* Nuts carries the most weight of the three: solid fill, white on Cherry (7.06:1). */
+.diet-tag--nuts { background: var(--pink-deep); color: #fff; }
+.diet-tag--gluten, .diet-tag--eggs { background: #fff; color: var(--choc); }
+
+/* An out-of-stock flavour strikes through its name. Allergen text must stay
+   legible and unstruck — a crossed-out "Contains nuts" is worse than no tag. */
+.flavour-index-item.flavour-out dt .diet-tag { text-decoration: none; }
+
 .flavour-filter-note {
   margin-top: 40px; text-align: center; color: var(--choc-soft); font-size: 0.95rem;
 }
+.allergen-note {
+  max-width: 60ch; margin: 18px auto 0; text-align: center;
+  color: var(--choc); font-size: 0.95rem; line-height: 1.55;
+  background: var(--caramel-soft); border: 3px solid var(--choc);
+  border-radius: var(--radius); padding: 16px 20px;
+  box-shadow: 0 6px 0 rgba(58, 35, 24, 0.9);
+}
+.allergen-note strong { font-weight: 700; }
 
 /* ============ Live stock status (set by staff in admin.html) ============ */
 .stock-badge {

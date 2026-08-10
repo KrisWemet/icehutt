@@ -201,6 +201,11 @@ is the accent text colour and should not be used as a large fill. Every
 text-on-background pair in this system clears WCAG AA (4.5:1), and this split is
 how that stays true.
 
+> One sanctioned exception: the **Contains Nuts** allergen tag fills a pill with
+> Cherry and sets white text on it (7.06:1). A badge is not a large fill, and
+> allergen information is the one place in this system where a tag must outrank
+> everything around it. No other component may fill with Cherry.
+
 **The One Brown Rule.** Borders, shadows, and body copy are all Chocolate Ink.
 Do not introduce a second neutral, a grey, or a pure black. Depth and structure
 come from one colour used consistently.
